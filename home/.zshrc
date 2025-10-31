@@ -31,10 +31,13 @@ setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 
 alias ez='eza --icons=always --color=always -a'
 alias e='eza --icons=always --color=always -la'
-alias c='clear'
+alias cl='clear'
 alias nf='fastfetch'
-alias pf='fastfetch'
 alias ff='fastfetch'
+alias nv='nvim'
+alias vi='nvim'
+alias svi='sudo nvim'
+alias update='sudo pacman -Syu'
 
 
 # Exports
