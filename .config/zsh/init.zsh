@@ -8,7 +8,7 @@ mkdir -p ~/.config/zsh
 # Environment Setup
 # =============================================================================
 
-# PATH (orden importa: primero local, luego sistema)
+# PATH
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/lib/ccache/bin:$PATH"
 
 # Editor configuration
@@ -42,14 +42,9 @@ fi
 # External Tools Initialization
 # =============================================================================
 
-# Zoxide (navegación rápida)
+# Zoxide (navigate directories faster)
 if command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
-fi
-
-# TheFuck (corrección de comandos)
-if command -v thefuck &> /dev/null; then
-    eval "$(thefuck --alias fuck)"
 fi
 
 # =============================================================================
