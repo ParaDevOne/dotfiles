@@ -5,6 +5,7 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 ## 📋 Prerequisites
 
 ### System Requirements
+
 - **Linux** (tested on Arch Linux, works on any distro)
 - **zsh 5.9+** (shell)
 - **git** (for cloning and plugin management)
@@ -14,6 +15,7 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 ## 🛠️ Required Tools
 
 ### Core Shell & Terminal
+
 | Tool | Version | Purpose | Install |
 |------|---------|---------|---------|
 | **zsh** | 5.9+ | Shell runtime | `sudo pacman -S zsh` |
@@ -21,6 +23,7 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 | **Hack Nerd Font Mono** | latest | Terminal font | `sudo pacman -S nerd-fonts-hack` |
 
 ### Plugin Managers & ZSH Extensions
+
 | Tool | Purpose | Install |
 |------|---------|----------|
 | **Znap** | Plugin manager (simpler & faster) | Auto-installed on first `.zshrc` load |
@@ -32,6 +35,7 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 | **zsh-you-should-use** | Alias reminders | `znap` (auto) |
 
 ### External Tools (Recommended)
+
 | Tool | Purpose | Install |
 |------|---------|----------|
 | **eza** | Modern `ls` replacement | `sudo pacman -S eza` |
@@ -42,6 +46,7 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 | **Starship** | Prompt customization | `sudo pacman -S starship` |
 
 ### System Utilities
+
 | Tool | Purpose | Install |
 |------|---------|----------|
 | **fastfetch** | System info display | `sudo pacman -S fastfetch` |
@@ -49,26 +54,24 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 | **nano** / **code** | Text editors | `sudo pacman -S nano code` |
 | **nano** / **code** | Text editors | `yay/paru code` |
 
-
-
 ## ⚡ Quick Start
 
 ### 1. Clone Repository
+
 ```bash
-git clone https://github.com/yourusername/dotfiles ~/.config/dotfiles
+git clone https://github.com/ParaDevOne/dotfiles-plasma ~/.config/dotfiles
 cd ~/.config/dotfiles
 ```
 
 ### 2. Install Core Tools
+
 ```bash
 # Arch Linux
 sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch qt6ct
-
-# Ubuntu/Debian (adapt versions as needed)
-sudo apt install zsh kitty eza fzf bat zoxide thefuck starship fastfetch
 ```
 
 ### 3. Install Dotfiles
+
 ```bash
 # Backup existing config (optional)
 mkdir -p ~/.config/backup
@@ -83,6 +86,7 @@ ln -sf ~/.config/dotfiles/.config/fastfetch ~/.config/
 ```
 
 ### 4. Initialize ZSH
+
 ```bash
 # Change default shell
 chsh -s /usr/bin/zsh
