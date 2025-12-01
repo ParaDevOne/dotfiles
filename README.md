@@ -47,6 +47,7 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 | **fastfetch** | System info display | `sudo pacman -S fastfetch` |
 | **qt6ct** | Qt6 theme manager | `sudo pacman -S qt6ct` |
 | **nano** / **code** | Text editors | `sudo pacman -S nano code` |
+| **nano** / **code** | Text editors | `yay/paru code` |
 
 
 
@@ -61,10 +62,10 @@ cd ~/.config/dotfiles
 ### 2. Install Core Tools
 ```bash
 # Arch Linux
-sudo pacman -S zsh kitty nerd-fonts-hack eza fzf bat zoxide thefuck starship fastfetch qt6ct
+sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch qt6ct
 
 # Ubuntu/Debian (adapt versions as needed)
-sudo apt install zsh kitty fonts-hack-nerd eza fzf bat zoxide thefuck starship fastfetch
+sudo apt install zsh kitty eza fzf bat zoxide thefuck starship fastfetch
 ```
 
 ### 3. Install Dotfiles
@@ -121,6 +122,7 @@ dotfiles/
 ## 🚀 Performance Optimization
 
 ### Shell Startup Time
+
 ```bash
 # Benchmark startup
 time zsh -i -c exit
@@ -132,6 +134,7 @@ znap list
 **Target**: ~150ms with all plugins loaded
 
 ### Performance Strategy
+
 - **Synchronous loading**: Znap sources plugins sequentially without delay
 - **Early syntax highlighting**: fast-syntax-highlighting loads before other plugins
 - **Syntax highlighting**: Loads synchronously before other plugins
@@ -142,24 +145,28 @@ znap list
 ## ⚙️ Configuration
 
 ### Customize Aliases
+
 Edit `~/.config/zsh/aliases.zsh`:
 ```bash
 alias mycommand='actual command'
 ```
 
 ### Add Keybindings
+
 Edit `~/.config/zsh/keybindings.zsh`:
 ```bash
 bindkey '^X' my-function
 ```
 
 ### Add Zsh Plugins
+
 Edit `~/.config/zsh/znap.zsh`:
 ```bash
 znap source owner/plugin-name
 ```
 
 ### Customize Terminal Theme
+
 Edit `~/.config/kitty/theme.conf` (supports all Catppuccin variants)
 
 ---
@@ -167,17 +174,20 @@ Edit `~/.config/kitty/theme.conf` (supports all Catppuccin variants)
 ## 🧪 Validation & Troubleshooting
 
 ### Validate Shell Config
+
 ```bash
 # Test shell load
 zsh -c "source ~/.zshrc && echo SUCCESS"
 ```
 
 ### Test Shell Loading
+
 ```bash
 zsh -c "source ~/.zshrc && echo SUCCESS"
 ```
 
 ### Debug Startup Issues
+
 ```bash
 # Check for errors
 zsh -x ~/.zshrc 2>&1 | head -50
@@ -189,14 +199,17 @@ znap list
 ### Common Issues
 
 **Error: "bad set of key/value pairs for associative array"**
+
 - Check `~/.config/zsh/*.zsh` for `export ARRAY=()` instead of `typeset -A ARRAY=()`
 
 **Slow startup time**
+
 - Profile: `time zsh -i -c exit`
 - Check plugin load order in `znap.zsh`
 - Disable unnecessary plugins
 
 **Keybindings not working**
+
 - Test in kitty terminal: `kitty` (supports shell integration)
 - Check conflict with other key bindings
 
@@ -204,27 +217,30 @@ znap list
 
 ## 📚 External Tool Documentation
 
-- **Znap**: https://github.com/marlonrichert/zsh-snap
-- **Kitty**: https://sw.kovidgoyal.net/kitty/
-- **fzf**: https://github.com/junegunn/fzf
-- **Starship**: https://starship.rs/
-- **Catppuccin**: https://catppuccin.com/
+- **Znap**: <https://github.com/marlonrichert/zsh-snap>
+- **Kitty**: <https://sw.kovidgoyal.net/kitty/>
+- **fzf**: <https://github.com/junegunn/fzf>
+- **Starship**: <https://starship.rs/>
+- **Catppuccin**: <https://catppuccin.com/>
 
 ---
 
 ## 🔧 Manual Installation (if auto-install fails)
 
 ### Znap (Plugin Manager)
+
 ```bash
 git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git ~/.config/zsh/plugins/zsh-snap
 ```
 
 ### Optional: TheFuck
+
 ```bash
 pip install thefuck
 ```
 
 ### Optional: Rust Tools
+
 ```bash
 # Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -234,23 +250,10 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch
 ```
 
----
-
-## 📋 Checklist
-
-- [ ] Clone dotfiles repository
-- [ ] Install core tools (zsh, kitty, fonts)
-- [ ] Link configuration files
-- [ ] Change default shell to zsh
-- [ ] Open new terminal to verify
-- [ ] Customize aliases if needed
-- [ ] Test startup performance
-
----
-
 ## 🆘 Support
 
 If something breaks:
+
 1. Check `.github/copilot-instructions.md` for architecture details
 2. Validate shell config: `zsh -c "source ~/.zshrc && echo OK"`
 3. Test shell: `zsh -c "source ~/.zshrc && echo OK"`
@@ -258,4 +261,4 @@ If something breaks:
 
 ---
 
-**Last Updated**: 2025-11-29 | **Startup Time**: ~150ms | **Shell**: zsh 5.9+
+**Last Updated**: 2025-12-1 | **Startup Time**: ~150ms | **Shell**: zsh 5.9+
