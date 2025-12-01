@@ -1,12 +1,12 @@
 # Linux Desktop Dotfiles
 
-Modern, modular configuration for Linux desktop with optimized zsh shell, kitty terminal, and system utilities. **Startup performance: ~150ms**.
+Modern, modular configuration for Linux desktop with optimized zsh shell, kitty terminal, and system utilities. **Startup ZSH performance: ~150ms**.
 
 ## 📋 Prerequisites
 
 ### System Requirements
 
-- **Linux** (tested on Arch Linux, works on any distro)
+- **Linux** (tested on Arch Linux, works on based distro)
 - **zsh 5.9+** (shell)
 - **git** (for cloning and plugin management)
 
@@ -18,9 +18,8 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 
 | Tool | Version | Purpose | Install |
 |------|---------|---------|---------|
-| **zsh** | 5.9+ | Shell runtime | `sudo pacman -S zsh` |
-| **kitty** | latest | Terminal emulator | `sudo pacman -S kitty` |
-| **Hack Nerd Font Mono** | latest | Terminal font | `sudo pacman -S nerd-fonts-hack` |
+| **zsh** | 5.9+ | Shell runtime | `sudo pacman -S zsh --noconfirm` |
+| **kitty** | latest | Terminal emulator | `sudo pacman -S kitty --noconfirm` |
 
 ### Plugin Managers & ZSH Extensions
 
@@ -51,8 +50,8 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 |------|---------|----------|
 | **fastfetch** | System info display | `sudo pacman -S fastfetch` |
 | **qt6ct** | Qt6 theme manager | `sudo pacman -S qt6ct` |
-| **nano** / **code** | Text editors | `sudo pacman -S nano code` |
-| **nano** / **code** | Text editors | `yay/paru code` |
+| **nano** / **code** | Text editors | `sudo pacman -S nano` |
+| **nano** / **code** | Text editors | `yay/paru visual-studio-code-bin` |
 
 ## ⚡ Quick Start
 
@@ -67,7 +66,7 @@ cd ~/.config/dotfiles
 
 ```bash
 # Arch Linux
-sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch qt6ct
+sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch qt6ct --noconfirm
 ```
 
 ### 3. Install Dotfiles
@@ -100,7 +99,7 @@ source ~/.zshrc
 
 ## 📁 Directory Structure
 
-```
+```txt
 dotfiles/
 ├── .zshrc                      # Entry point (sources modular configs)
 ├── .config/
@@ -151,6 +150,7 @@ znap list
 ### Customize Aliases
 
 Edit `~/.config/zsh/aliases.zsh`:
+
 ```bash
 alias mycommand='actual command'
 ```
@@ -158,6 +158,7 @@ alias mycommand='actual command'
 ### Add Keybindings
 
 Edit `~/.config/zsh/keybindings.zsh`:
+
 ```bash
 bindkey '^X' my-function
 ```
@@ -165,6 +166,7 @@ bindkey '^X' my-function
 ### Add Zsh Plugins
 
 Edit `~/.config/zsh/znap.zsh`:
+
 ```bash
 znap source owner/plugin-name
 ```
@@ -202,17 +204,17 @@ znap list
 
 ### Common Issues
 
-**Error: "bad set of key/value pairs for associative array"**
+### Error: "bad set of key/value pairs for associative array"
 
 - Check `~/.config/zsh/*.zsh` for `export ARRAY=()` instead of `typeset -A ARRAY=()`
 
-**Slow startup time**
+### Slow startup time
 
 - Profile: `time zsh -i -c exit`
 - Check plugin load order in `znap.zsh`
 - Disable unnecessary plugins
 
-**Keybindings not working**
+### Keybindings not working
 
 - Test in kitty terminal: `kitty` (supports shell integration)
 - Check conflict with other key bindings
@@ -237,13 +239,7 @@ znap list
 git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git ~/.config/zsh/plugins/zsh-snap
 ```
 
-### Optional: TheFuck
-
-```bash
-pip install thefuck
-```
-
-### Optional: Rust Tools
+### Rust Tools
 
 ```bash
 # Install Rust
@@ -251,7 +247,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Then install tools if needed
 # Alternative: Via Arch Linux pacman (system packages)
-sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch
+sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch --noconfirm
 ```
 
 ## 🆘 Support
