@@ -33,7 +33,7 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 | **history-search-multi-word** | Advanced history search | `znap` (auto) |
 | **zsh-you-should-use** | Alias reminders | `znap` (auto) |
 
-### External Tools (Recommended)
+### Tools for Enhanced Shell Experience (CLI Utilities)
 
 | Tool | Purpose | Install |
 |------|---------|----------|
@@ -41,7 +41,6 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 | **fzf** | Fuzzy finder | `sudo pacman -S fzf` |
 | **bat** | cat with syntax highlighting | `sudo pacman -S bat` |
 | **zoxide** | cd replacement with history | `sudo pacman -S zoxide` |
-| **thefuck** | Command correction | `sudo pacman -S thefuck` |
 | **Starship** | Prompt customization | `sudo pacman -S starship` |
 
 ### System Utilities
@@ -50,8 +49,8 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 |------|---------|----------|
 | **fastfetch** | System info display | `sudo pacman -S fastfetch` |
 | **qt6ct** | Qt6 theme manager | `sudo pacman -S qt6ct` |
-| **nano** / **code** | Text editors | `sudo pacman -S nano` |
-| **nano** / **code** | Text editors | `yay/paru visual-studio-code-bin` |
+| **nano** | Text editor | `sudo pacman -S nano` |
+| **code** | Text editor | `yay/paru visual-studio-code-bin` |
 
 ## ⚡ Quick Start
 
@@ -66,7 +65,7 @@ cd ~/.config/dotfiles
 
 ```bash
 # Arch Linux
-sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch qt6ct --noconfirm
+sudo pacman -S zsh kitty eza fzf bat zoxide starship fastfetch qt6ct --noconfirm
 ```
 
 ### 3. Install Dotfiles
@@ -92,6 +91,7 @@ chsh -s /usr/bin/zsh
 
 # Open new terminal or reload
 zsh
+
 source ~/.zshrc
 ```
 
