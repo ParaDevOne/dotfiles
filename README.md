@@ -1,0 +1,261 @@
+# Linux Desktop Dotfiles
+
+Modern, modular configuration for Linux desktop with optimized zsh shell, kitty terminal, and system utilities. **Startup performance: ~150ms**.
+
+## 📋 Prerequisites
+
+### System Requirements
+- **Linux** (tested on Arch Linux, works on any distro)
+- **zsh 5.9+** (shell)
+- **git** (for cloning and plugin management)
+
+---
+
+## 🛠️ Required Tools
+
+### Core Shell & Terminal
+| Tool | Version | Purpose | Install |
+|------|---------|---------|---------|
+| **zsh** | 5.9+ | Shell runtime | `sudo pacman -S zsh` |
+| **kitty** | latest | Terminal emulator | `sudo pacman -S kitty` |
+| **Hack Nerd Font Mono** | latest | Terminal font | `sudo pacman -S nerd-fonts-hack` |
+
+### Plugin Managers & ZSH Extensions
+| Tool | Purpose | Install |
+|------|---------|----------|
+| **Znap** | Plugin manager (simpler & faster) | Auto-installed on first `.zshrc` load |
+| **zsh-autosuggestions** | Command suggestions | `znap` (auto) |
+| **zsh-completions** | Extended completions | `znap` (auto) |
+| **fast-syntax-highlighting** | Syntax highlighting | `znap` (auto) |
+| **fzf-tab** | Fuzzy tab completion | `znap` (auto) |
+| **history-search-multi-word** | Advanced history search | `znap` (auto) |
+| **zsh-you-should-use** | Alias reminders | `znap` (auto) |
+
+### External Tools (Recommended)
+| Tool | Purpose | Install |
+|------|---------|----------|
+| **eza** | Modern `ls` replacement | `sudo pacman -S eza` |
+| **fzf** | Fuzzy finder | `sudo pacman -S fzf` |
+| **bat** | cat with syntax highlighting | `sudo pacman -S bat` |
+| **zoxide** | cd replacement with history | `sudo pacman -S zoxide` |
+| **thefuck** | Command correction | `sudo pacman -S thefuck` |
+| **Starship** | Prompt customization | `sudo pacman -S starship` |
+
+### System Utilities
+| Tool | Purpose | Install |
+|------|---------|----------|
+| **fastfetch** | System info display | `sudo pacman -S fastfetch` |
+| **qt6ct** | Qt6 theme manager | `sudo pacman -S qt6ct` |
+| **nano** / **code** | Text editors | `sudo pacman -S nano code` |
+
+
+
+## ⚡ Quick Start
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/yourusername/dotfiles ~/.config/dotfiles
+cd ~/.config/dotfiles
+```
+
+### 2. Install Core Tools
+```bash
+# Arch Linux
+sudo pacman -S zsh kitty nerd-fonts-hack eza fzf bat zoxide thefuck starship fastfetch qt6ct
+
+# Ubuntu/Debian (adapt versions as needed)
+sudo apt install zsh kitty fonts-hack-nerd eza fzf bat zoxide thefuck starship fastfetch
+```
+
+### 3. Install Dotfiles
+```bash
+# Backup existing config (optional)
+mkdir -p ~/.config/backup
+[[ -f ~/.zshrc ]] && cp ~/.zshrc ~/.config/backup/
+[[ -d ~/.config/zsh ]] && cp -r ~/.config/zsh ~/.config/backup/
+
+# Link dotfiles
+ln -sf ~/.config/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/.config/dotfiles/.config/zsh ~/.config/
+ln -sf ~/.config/dotfiles/.config/kitty ~/.config/
+ln -sf ~/.config/dotfiles/.config/fastfetch ~/.config/
+```
+
+### 4. Initialize ZSH
+```bash
+# Change default shell
+chsh -s /usr/bin/zsh
+
+# Open new terminal or reload
+zsh
+source ~/.zshrc
+```
+
+---
+
+## 📁 Directory Structure
+
+```
+dotfiles/
+├── .zshrc                      # Entry point (sources modular configs)
+├── .config/
+│   ├── zsh/
+│   │   ├── init.zsh           # PATH, env vars (LOAD FIRST)
+│   │   ├── config.zsh         # Zsh options, history, completions
+│   │   ├── znap.zsh           # Plugin manager (auto-install)
+│   │   ├── aliases.zsh        # Command aliases
+│   │   └── keybindings.zsh    # Keyboard shortcuts
+│   ├── kitty/
+│   │   ├── kitty.conf         # Main configuration
+│   │   ├── theme.conf         # Catppuccin Macchiato theme
+│   │   └── keybindings.conf   # Terminal keybindings
+│   ├── fastfetch/
+│   │   └── config.jsonc       # System info display config
+│   └── qt6ct/
+│       └── qt6ct.conf         # Qt6 theme settings
+└── README.md                  # This file
+```
+
+---
+
+## 🚀 Performance Optimization
+
+### Shell Startup Time
+```bash
+# Benchmark startup
+time zsh -i -c exit
+
+# Debug plugin loading
+znap list
+```
+
+**Target**: ~150ms with all plugins loaded
+
+### Performance Strategy
+- **Synchronous loading**: Znap sources plugins sequentially without delay
+- **Early syntax highlighting**: fast-syntax-highlighting loads before other plugins
+- **Syntax highlighting**: Loads synchronously before other plugins
+- **Auto-completion**: Loads on-demand
+
+---
+
+## ⚙️ Configuration
+
+### Customize Aliases
+Edit `~/.config/zsh/aliases.zsh`:
+```bash
+alias mycommand='actual command'
+```
+
+### Add Keybindings
+Edit `~/.config/zsh/keybindings.zsh`:
+```bash
+bindkey '^X' my-function
+```
+
+### Add Zsh Plugins
+Edit `~/.config/zsh/znap.zsh`:
+```bash
+znap source owner/plugin-name
+```
+
+### Customize Terminal Theme
+Edit `~/.config/kitty/theme.conf` (supports all Catppuccin variants)
+
+---
+
+## 🧪 Validation & Troubleshooting
+
+### Validate Shell Config
+```bash
+# Test shell load
+zsh -c "source ~/.zshrc && echo SUCCESS"
+```
+
+### Test Shell Loading
+```bash
+zsh -c "source ~/.zshrc && echo SUCCESS"
+```
+
+### Debug Startup Issues
+```bash
+# Check for errors
+zsh -x ~/.zshrc 2>&1 | head -50
+
+# List loaded plugins
+znap list
+```
+
+### Common Issues
+
+**Error: "bad set of key/value pairs for associative array"**
+- Check `~/.config/zsh/*.zsh` for `export ARRAY=()` instead of `typeset -A ARRAY=()`
+
+**Slow startup time**
+- Profile: `time zsh -i -c exit`
+- Check plugin load order in `znap.zsh`
+- Disable unnecessary plugins
+
+**Keybindings not working**
+- Test in kitty terminal: `kitty` (supports shell integration)
+- Check conflict with other key bindings
+
+---
+
+## 📚 External Tool Documentation
+
+- **Znap**: https://github.com/marlonrichert/zsh-snap
+- **Kitty**: https://sw.kovidgoyal.net/kitty/
+- **fzf**: https://github.com/junegunn/fzf
+- **Starship**: https://starship.rs/
+- **Catppuccin**: https://catppuccin.com/
+
+---
+
+## 🔧 Manual Installation (if auto-install fails)
+
+### Znap (Plugin Manager)
+```bash
+git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git ~/.config/zsh/plugins/zsh-snap
+```
+
+### Optional: TheFuck
+```bash
+pip install thefuck
+```
+
+### Optional: Rust Tools
+```bash
+# Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Then install tools if needed
+# Alternative: Via Arch Linux pacman (system packages)
+sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch
+```
+
+---
+
+## 📋 Checklist
+
+- [ ] Clone dotfiles repository
+- [ ] Install core tools (zsh, kitty, fonts)
+- [ ] Link configuration files
+- [ ] Change default shell to zsh
+- [ ] Open new terminal to verify
+- [ ] Customize aliases if needed
+- [ ] Test startup performance
+
+---
+
+## 🆘 Support
+
+If something breaks:
+1. Check `.github/copilot-instructions.md` for architecture details
+2. Validate shell config: `zsh -c "source ~/.zshrc && echo OK"`
+3. Test shell: `zsh -c "source ~/.zshrc && echo OK"`
+4. Check errors: `zsh -x ~/.zshrc 2>&1 | grep -i error`
+
+---
+
+**Last Updated**: 2025-11-29 | **Startup Time**: ~150ms | **Shell**: zsh 5.9+
