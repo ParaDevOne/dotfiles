@@ -18,8 +18,8 @@ Modern, modular configuration for Linux desktop with optimized zsh shell, kitty 
 
 | Tool | Version | Purpose | Install |
 |------|---------|---------|---------|
-| **zsh** | 5.9+ | Shell runtime | `sudo pacman -S zsh --noconfirm` |
-| **kitty** | latest | Terminal emulator | `sudo pacman -S kitty --noconfirm` |
+| **zsh** | 5.9+ | Shell runtime | `sudo pacman -S zsh` |
+| **kitty** | latest | Terminal emulator | `sudo pacman -S kitty` |
 
 ### Plugin Managers & ZSH Extensions
 
