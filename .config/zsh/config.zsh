@@ -47,8 +47,7 @@ setopt CDABLE_VARS               # Permite cd ~/var si var es variable
 # =============================================================================
 # Correction and Globbing Options
 # =============================================================================
-setopt CORRECT                   # Corrects typos in commands
-setopt CORRECT_ALL               # Corrects all arguments
+setopt correct_param             # Correct commands with parameters
 setopt NO_CASE_GLOB              # Case insensitive globbing
 setopt EXTENDED_GLOB             # Advanced globbing
 setopt NUMERIC_GLOB_SORT         # Sorts files numerically
@@ -73,8 +72,8 @@ export USE_POWERLINE="true"
 export HAS_WIDECHARS="true"
 export COLORTERM="truecolor"
 export FORCE_256COLORS="true"
-export LANG=es_ES.UTF-8
-export LC_ALL=es_ES.UTF-8
+export LANG=en_EN.UTF-8
+export LC_ALL=en_EN.UTF-8
 
 # Less with colors
 export LESS='-R -F -X'
