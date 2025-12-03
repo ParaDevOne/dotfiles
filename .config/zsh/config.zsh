@@ -69,15 +69,12 @@ setopt NOTIFY                    # Notifies when job finishes
 # =============================================================================
 # Environment Variables
 # =============================================================================
-export USE_POWERLINE="true"
-export HAS_WIDECHARS="true"
 export COLORTERM="truecolor"
-export FORCE_256COLORS="true"
-export LANG=en_EN.UTF-8
-export LC_ALL=en_EN.UTF-8
+export LANG=es_ES.UTF-8
+export LC_ALL=es_ES.UTF-8
 
 # Less with colors
-export LESS='-R -F -X'
+export LESS='-R'
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -90,14 +87,16 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Completions
 # =============================================================================
 autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+if [[ ! -f ~/.config/zsh/.zcompdump || \
+      ~/.config/zsh/.zcompdump -ot ~/.zshrc ]]; then
+    autoload -Uz compinit
     compinit -d ~/.config/zsh/.zcompdump
 else
+    autoload -Uz compinit
     compinit -C -d ~/.config/zsh/.zcompdump
 fi
 
 # Completion styles
-zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:kill:*' menu yes select
@@ -114,14 +113,11 @@ zstyle ':completion:*' menu no                              # Disable default ta
 zstyle ':completion:*:history-search-multi-word:*' history-search-multi-word true
 zstyle ':completion:*:history-search-multi-word:*' max-entries 50
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zsh
-zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.config/zsh/.zcompcache
 zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*' file-sort modification
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
-zstyle ':completion:*:*:git:*' script ~/.config/zsh/git-completion.zsh
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
 zstyle ':completion:*:descriptions' format '[%d]'
 # fzf-tab styling
@@ -134,7 +130,8 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # FZF Configuration
 # =============================================================================
 if command -v fzf &> /dev/null; then
-    source <(fzf --zsh)
+    fzf --zsh > ~/.config/zsh/fzf.zsh
+    source ~/.config/zsh/fzf.zsh
     
     export FZF_DEFAULT_OPTS="
         --height 40%

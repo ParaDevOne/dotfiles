@@ -5,8 +5,8 @@
 #  _ / /\__ \ | | | | | (__
 # (_)___|___/_| |_|_|  \___|
 #
-# Performance: ~150ms startup (529 líneas modulares)
-# Last benchmark: 2025-11-29
+# Performance: ~62ms startup (482 líneas modulares)
+# Last benchmark: 2025-12-03
 # -----------------------------------------------------
 
 # Source modular configuration
