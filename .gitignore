@@ -1,0 +1,43 @@
+# Temporary files
+*~
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.trash/
+.cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Local configuration overrides
+*.local
+.local/
+
+# Shell history backups
+.zsh_history.bak
+.bash_history.bak
+
+# Performance profiling data (specific to this project)
+.zprfile
+
+# Temporary test files
+test-tmp/
