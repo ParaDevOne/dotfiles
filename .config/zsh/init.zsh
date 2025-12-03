@@ -5,6 +5,22 @@
 mkdir -p ~/.config/zsh
 
 # =============================================================================
+# Modular Configuration Loading
+# =============================================================================
+
+# 1. Config
+source ~/.config/zsh/config.zsh
+
+# 3. Plugins
+source ~/.config/zsh/znap.zsh
+
+# 4. Aliases
+source ~/.config/zsh/aliases.zsh
+
+# 5. Keybindings
+source ~/.config/zsh/keybinds.zsh
+
+# =============================================================================
 # Environment Setup
 # =============================================================================
 

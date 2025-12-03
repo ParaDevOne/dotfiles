@@ -8,23 +8,9 @@
 # Performance: ~150ms startup (529 líneas modulares)
 # Last benchmark: 2025-11-29
 # -----------------------------------------------------
-# Load modular configuration
-# -----------------------------------------------------
 
-# 1. Init (PATH y críticos - PRIMERO)
+# Source modular configuration
 source ~/.config/zsh/init.zsh
-
-# 2. Config (opciones generales)
-source ~/.config/zsh/config.zsh
-
-# 3. Plugins
-source ~/.config/zsh/znap.zsh
-
-# 4. Aliases
-source ~/.config/zsh/aliases.zsh
-
-# 5. Keybindings
-source ~/.config/zsh/keybindings.zsh
 
 # -----------------------------------------------------
 # External tools

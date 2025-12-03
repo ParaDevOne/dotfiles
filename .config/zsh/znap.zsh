@@ -59,6 +59,18 @@ znap source zdharma-continuum/history-search-multi-word
 # Cat - Enhanced cat command with syntax highlighting
 znap source fdellwing/zsh-bat
 
+# Sudo Plugin - Allows sudoing the last command easily
+znap source ohmyzsh/ohmyzsh plugins/sudo
+
+# Git Plugin - Provides git aliases and functions
+znap source ohmyzsh/ohmyzsh plugins/git
+
+# Dirhistory Plugin - Directory history navigation
+znap source ohmyzsh/ohmyzsh plugins/dirhistory
+
+# Colored Man Pages Plugin - Adds color to man pages
+znap source ohmyzsh/ohmyzsh plugins/colored-man-pages
+
 # =============================================================================
 # Plugin Configuration
 # =============================================================================
