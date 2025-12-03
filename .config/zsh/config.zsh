@@ -112,6 +112,18 @@ zstyle ':completion:*' completer _complete _approximate
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*' menu no                              # Disable default tab completion in favor of fzf-tab
 zstyle ':fzf-tab:*' fzf-flags --preview-window=right:50%    # FZF-Tab color scheme
+zstyle ':fzf-tab:*' fzf-colors 'fg:#f8f8f2,bg:#282a36,hl:#bd93f9,fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9,info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6,marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+zstyle ':completion:*:history-search-multi-word:*' history-search-multi-word true
+zstyle ':completion:*:history-search-multi-word:*' max-entries 50
+# Additional zstyle configurations for enhanced completion behavior
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.config/zsh/.zcompcache
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' file-sort modification
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:git:*' script ~/.config/zsh/git-completion.zsh
+zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
 
 # =============================================================================
 # FZF Configuration
