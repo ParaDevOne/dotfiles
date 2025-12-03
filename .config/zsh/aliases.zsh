@@ -15,8 +15,6 @@ alias v='$EDITOR'
 alias vi='$EDITOR'
 alias vim='$EDITOR'
 alias nn='$EDITOR'
-alias cd='z'
-alias cd ..='z ..'
 
 # -----------------------------------------------------
 # Git
