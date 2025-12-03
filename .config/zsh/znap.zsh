@@ -74,12 +74,6 @@ export YSU_MESSAGE_POSITION="after"
 export YSU_HARDCORE=0
 export YSU_MODE=ALL
 
-# Disable default tab completion in favor of fzf-tab
-zstyle ':completion:*' menu no
-
-# FZF-Tab color scheme
-zstyle ':fzf-tab:*' fzf-flags --preview-window=right:50%
-
 # =============================================================================
 # Fast Syntax Highlighting Configuration
 # =============================================================================
@@ -98,10 +92,3 @@ typeset -A FAST_HIGHLIGHT_STYLES=(
     globbing 'fg=magenta'
     history-expansion 'fg=magenta'
 )
-
-# =============================================================================
-# History Search Multi-Word Configuration
-# =============================================================================
-
-# Keybindings for multi-word history search
-bindkey '^R' history-search-multi-word

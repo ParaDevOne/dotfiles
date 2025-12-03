@@ -5,7 +5,6 @@
 # -----------------------------------------------------
 # General
 # -----------------------------------------------------
-alias c='clear'
 alias cl='clear'
 alias ff='fastfetch'
 alias ls='eza -a --icons=always'
@@ -16,9 +15,8 @@ alias v='$EDITOR'
 alias vi='$EDITOR'
 alias vim='$EDITOR'
 alias nn='$EDITOR'
-alias wifi='nmtui'
-alias tree='tree -Ca'
-alias t='tree -L 2 -C' 
+alias cd='z'
+alias cd ..='z ..'
 
 # -----------------------------------------------------
 # Git

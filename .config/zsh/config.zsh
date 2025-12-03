@@ -47,7 +47,8 @@ setopt CDABLE_VARS               # Permite cd ~/var si var es variable
 # =============================================================================
 # Correction and Globbing Options
 # =============================================================================
-setopt correct_param             # Correct commands with parameters
+unsetopt CORRECT_ALL             # Only correct first word
+setopt CORRECT                   # Enables correction
 setopt NO_CASE_GLOB              # Case insensitive globbing
 setopt EXTENDED_GLOB             # Advanced globbing
 setopt NUMERIC_GLOB_SORT         # Sorts files numerically
@@ -107,6 +108,10 @@ zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
 zstyle ':completion:*' list-separator '#'
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.*' insert-sections true
+zstyle ':completion:*' completer _complete _approximate
+zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*' menu no                              # Disable default tab completion in favor of fzf-tab
+zstyle ':fzf-tab:*' fzf-flags --preview-window=right:50%    # FZF-Tab color scheme
 
 # =============================================================================
 # FZF Configuration

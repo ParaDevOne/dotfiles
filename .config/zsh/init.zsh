@@ -19,11 +19,6 @@ export VISUAL=code
 # Terminal & Display
 # =============================================================================
 
-# Kitty terminal detection
-if [[ "$TERM" == "xterm-kitty" ]]; then
-    export TERM=xterm-256color
-fi
-
 # Enable colors in less
 export LESS="-R"
 
