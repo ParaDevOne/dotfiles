@@ -86,7 +86,6 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # =============================================================================
 # Completions
 # =============================================================================
-autoload -Uz compinit
 if [[ ! -f ~/.config/zsh/.zcompdump || \
       ~/.config/zsh/.zcompdump -ot ~/.zshrc ]]; then
     autoload -Uz compinit
@@ -130,7 +129,10 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # FZF Configuration
 # =============================================================================
 if command -v fzf &> /dev/null; then
-    fzf --zsh > ~/.config/zsh/fzf.zsh
+    # Generar archivo FZF solo si no existe
+    if [[ ! -f ~/.config/zsh/fzf.zsh ]]; then
+        fzf --zsh > ~/.config/zsh/fzf.zsh
+    fi
     source ~/.config/zsh/fzf.zsh
     
     export FZF_DEFAULT_OPTS="
