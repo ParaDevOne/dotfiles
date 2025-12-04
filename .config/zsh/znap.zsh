@@ -38,6 +38,15 @@ fi
 # Plugins
 # =============================================================================
 
+# fzf-tab - Fuzzy tab completion
+znap source Aloxaf/fzf-tab
+
+# You-should-use - Reminds you of aliases
+znap source MichaelAquilina/zsh-you-should-use
+
+# History search multi-word - Advanced history search
+znap source zdharma-continuum/history-search-multi-word
+
 # Auto-suggestions - Provides suggestions as you type
 znap source zsh-users/zsh-autosuggestions
 
@@ -47,18 +56,6 @@ znap source zsh-users/zsh-completions
 # Fast syntax highlighting - Syntax highlighting while typing
 znap source zdharma-continuum/fast-syntax-highlighting
 
-# You-should-use - Reminds you of aliases
-znap source MichaelAquilina/zsh-you-should-use
-
-# fzf-tab - Fuzzy tab completion
-znap source Aloxaf/fzf-tab
-
-# History search multi-word - Advanced history search
-znap source zdharma-continuum/history-search-multi-word
-
-# Cat - Enhanced cat command with syntax highlighting
-znap source fdellwing/zsh-bat
-
 # =============================================================================
 # Plugin Configuration
 # =============================================================================
@@ -66,7 +63,7 @@ znap source fdellwing/zsh-bat
 # Autosuggestions - Strategy and styling
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50000
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # You-should-use - Message position and behavior
