@@ -5,6 +5,9 @@
 # 1. Config
 source ~/.config/zsh/config.zsh
 
+# 2. Functions
+source ~/.config/zsh/functions/general.zsh
+
 # 3. Plugins
 source ~/.config/zsh/znap.zsh
 
