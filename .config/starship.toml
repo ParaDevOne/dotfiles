@@ -47,11 +47,15 @@ format = "[$symbol ]($style)"
 style = "bg:color_orange fg:color_fg0"
 
 [os.symbols]
-Arch = " "
-Manjaro = " "
-Linux = " "
-Debian = " "
-Ubuntu = " "
+Arch = "󰣇"
+Manjaro = ""
+EndeavourOS = ""
+Garuda = "󰛓"
+Linux = ""
+Debian = ""
+Ubuntu = ""
+"Linux Mint" = ""
+"Pop!_OS" = ""
 
 [directory]
 style = "fg:color_fg0 bg:color_yellow"
