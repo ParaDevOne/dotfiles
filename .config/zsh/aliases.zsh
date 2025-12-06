@@ -15,27 +15,12 @@ alias v='$EDITOR'
 alias vi='$EDITOR'
 alias vim='$EDITOR'
 alias nn='$EDITOR'
-
-# -----------------------------------------------------
-# Git
-# -----------------------------------------------------
-alias gs="git status"
-alias ga="git add"
-alias gc="git commit -m"
-alias gp="git push"
-alias gpl="git pull"
-alias gst="git stash"
-alias gsp="git stash; git pull"
-alias gfo="git fetch origin"
-alias gcheck="git checkout"
-alias gcredential="git config credential.helper store"
+alias lf='zi'
+alias cd='z'
 
 # -----------------------------------------------------
 # System
 # -----------------------------------------------------
-alias update='sudo pacman -Syu'
-alias install='sudo pacman -S'
-alias remove='sudo pacman -Rns'
 alias search='pacman -Ss'
 alias upgrade='yay -Syu'
 alias update-systemd-boot='bootctl update'
