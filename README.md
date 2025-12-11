@@ -145,6 +145,34 @@ znap list
 
 ---
 
+## ⌨️ Keyboard Shortcuts
+
+All keybindings are centralized and documented in **[`.config/KEYBINDINGS.md`](.config/KEYBINDINGS.md)** for easy reference.
+
+### Quick Overview
+
+| Tool | Keybindings | Documentation |
+|------|-------------|---|
+| **ZSH** | History, navigation, editing | [ZSH Keybindings](.config/KEYBINDINGS.md#zsh-shell-keybindings) |
+| **Kitty** | Tab/window management, copy/paste | [Kitty Keybindings](.config/KEYBINDINGS.md#kitty-terminal-keybindings) |
+| **Zellij** | Pane/tab management, navigation | [Zellij Keybindings](.config/KEYBINDINGS.md#zellij-terminal-multiplexer-keybindings) |
+
+### Key Changes & Resolutions
+
+- ✅ **Alt+S**: Sudo prefix (changed from deprecated `Esc Esc` to avoid Zellij conflicts)
+- ✅ **Alt+hjkl**: Vim-style navigation in Zellij
+- ✅ **Ctrl+Shift**: Universal Kitty prefix (avoids shell conflicts)
+
+### Validation
+
+Run keybindings validation:
+
+```bash
+./check-keybindings.sh
+```
+
+---
+
 ## ⚙️ Configuration
 
 ### Customize Aliases
@@ -157,10 +185,35 @@ alias mycommand='actual command'
 
 ### Add Keybindings
 
-Edit `~/.config/zsh/keybindings.zsh`:
+ZSH keybindings are now **modularized** for better maintainability:
+
+- **History navigation**: `~/.config/zsh/keybinds/history.zsh`
+- **Word navigation**: `~/.config/zsh/keybinds/navigation.zsh`
+- **Line editing**: `~/.config/zsh/keybinds/editing.zsh`
+- **System utilities**: `~/.config/zsh/keybinds/system.zsh`
+
+To add a new keybinding, edit the appropriate module or create a new one and source it in `~/.config/zsh/keybinds.zsh`.
+
+Example (add to `~/.config/zsh/keybinds/custom.zsh`):
 
 ```bash
 bindkey '^X' my-function
+```
+
+Then add to `~/.config/zsh/keybinds.zsh`:
+
+```bash
+source "$KEYBINDS_DIR/custom.zsh"
+```
+
+For **Kitty** keybindings, edit `~/.config/kitty/keybindings.conf`.
+
+For **Zellij** keybindings, edit `~/.config/Code/User/zellij/config.kdl`.
+
+**Important:** After any keybinding changes, test with the validation script:
+
+```bash
+./check-keybindings.sh
 ```
 
 ### Add Zsh Plugins
@@ -218,6 +271,8 @@ znap list
 
 - Test in kitty terminal: `kitty` (supports shell integration)
 - Check conflict with other key bindings
+- Run: `./check-keybindings.sh` to validate configuration
+- Review: `.config/KEYBINDINGS.md` for conflict documentation
 
 ---
 

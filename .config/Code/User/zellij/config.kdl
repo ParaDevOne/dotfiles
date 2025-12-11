@@ -91,16 +91,9 @@ keybinds clear-defaults=true {
     }
 
     scroll {
-        bind "Alt left" { MoveFocusOrTab "left"; SwitchToMode "locked"; }
-        bind "Alt down" { MoveFocus "down"; SwitchToMode "locked"; }
-        bind "Alt up" { MoveFocus "up"; SwitchToMode "locked"; }
-        bind "Alt right" { MoveFocusOrTab "right"; SwitchToMode "locked"; }
+        // Navigation: Use Alt+arrows (defined in shared_among) or e/f for scroll operations
         bind "e" { EditScrollback; SwitchToMode "locked"; }
         bind "f" { SwitchToMode "entersearch"; SearchInput 0; }
-        bind "Alt h" { MoveFocusOrTab "left"; SwitchToMode "locked"; }
-        bind "Alt j" { MoveFocus "down"; SwitchToMode "locked"; }
-        bind "Alt k" { MoveFocus "up"; SwitchToMode "locked"; }
-        bind "Alt l" { MoveFocusOrTab "right"; SwitchToMode "locked"; }
         bind "s" { SwitchToMode "normal"; }
     }
 
@@ -233,11 +226,9 @@ keybinds clear-defaults=true {
         bind "s" { SwitchToMode "scroll"; }
     }
 
+    // Pane navigation mode available in most contexts
     shared_among "normal" "resize" "tab" "scroll" "prompt" "tmux" {
         bind "p" { SwitchToMode "pane"; }
-    }
-
-    shared_among "normal" "resize" "tab" "scroll" "prompt" "tmux" {
         bind "o" { SwitchToMode "session"; }
     }
 
