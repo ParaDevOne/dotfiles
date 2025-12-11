@@ -5,16 +5,13 @@
 # 1. Config
 source ~/.config/zsh/config.zsh
 
-# 2. Functions
-source ~/.config/zsh/functions/general.zsh
-
-# 3. Plugins
+# 2. Plugins
 source ~/.config/zsh/znap.zsh
 
-# 4. Aliases
+# 3. Aliases
 source ~/.config/zsh/aliases.zsh
 
-# 5. Keybindings
+# 4. Keybindings
 source ~/.config/zsh/keybinds.zsh
 
 # =============================================================================
@@ -50,9 +47,19 @@ fi
 # External Tools Initialization
 # =============================================================================
 
+# FZF (fuzzy finder)
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --zsh)"
+fi
+
 # Zoxide (navigate directories faster)
 if command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
+fi
+
+# Atuin (enhanced shell history)
+if command -v atuin &> /dev/null; then
+    eval "$(atuin init zsh)"
 fi
 
 # =============================================================================
@@ -63,3 +70,5 @@ fi
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
+
+start_if_needed

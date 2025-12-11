@@ -6,8 +6,8 @@
 # History
 # =============================================================================
 HISTFILE=~/.config/zsh/.zsh_history
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=1000000
+SAVEHIST=1000000
 
 # =============================================================================
 # History Options
@@ -69,6 +69,8 @@ setopt NOTIFY                    # Notifies when job finishes
 # =============================================================================
 # Environment Variables
 # =============================================================================
+# Color support & locale
+export TERM="xterm-256color"
 export COLORTERM="truecolor"
 export LANG=es_ES.UTF-8
 export LC_ALL=es_ES.UTF-8
@@ -82,6 +84,11 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# FZF default commands
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_DEFAULT_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exlude .git"
 
 # =============================================================================
 # Completions

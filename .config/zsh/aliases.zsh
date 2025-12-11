@@ -15,16 +15,12 @@ alias v='$EDITOR'
 alias vi='$EDITOR'
 alias vim='$EDITOR'
 alias nn='$EDITOR'
-alias lf='zi'
-alias cd='z'
+alias code='code .'
+alias cd='zi'
 
 # -----------------------------------------------------
 # System
 # -----------------------------------------------------
-alias search='pacman -Ss'
-alias upgrade='yay -Syu'
-alias update-systemd-boot='bootctl update'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias root='sudo su'
 
 alias grep='grep --color=auto'
