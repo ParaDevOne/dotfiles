@@ -12,8 +12,26 @@
 # Source modular configuration
 source ~/.config/zsh/init.zsh
 
-# -----------------------------------------------------
-# External tools
-# -----------------------------------------------------
+# =============================================================================
+# External Tools Initialization
+# =============================================================================
 
-eval "$(starship init zsh)"
+# Starship prompt
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
+
+# FZF (fuzzy finder)
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --zsh)"
+fi
+
+# Zoxide (navigate directories faster)
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
+# Atuin (enhanced shell history)
+if command -v atuin &> /dev/null; then
+    eval "$(atuin init zsh)"
+fi

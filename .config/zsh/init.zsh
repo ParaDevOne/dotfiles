@@ -14,7 +14,7 @@ source ~/.config/zsh/aliases.zsh
 # 4. Keybindings
 source ~/.config/zsh/keybinds.zsh
 
-# 5. Zellij Autostart (NEW)
+# 5. Zellij Autostart
 source ~/.config/zsh/zellij.zsh
 
 # =============================================================================
@@ -36,7 +36,7 @@ export VISUAL=code
 export LESS="-R"
 
 # =============================================================================
-# FZF Configuration (if installed)
+# FZF Configuration
 # =============================================================================
 
 if command -v fzf &> /dev/null; then
@@ -44,25 +44,6 @@ if command -v fzf &> /dev/null; then
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
     export FZF_DEFAULT_OPTS='--height 50% --multi --reverse --border'
-fi
-
-# =============================================================================
-# External Tools Initialization
-# =============================================================================
-
-# FZF (fuzzy finder)
-if command -v fzf &> /dev/null; then
-    eval "$(fzf --zsh)"
-fi
-
-# Zoxide (navigate directories faster)
-if command -v zoxide &> /dev/null; then
-    eval "$(zoxide init zsh)"
-fi
-
-# Atuin (enhanced shell history)
-if command -v atuin &> /dev/null; then
-    eval "$(atuin init zsh)"
 fi
 
 # =============================================================================
