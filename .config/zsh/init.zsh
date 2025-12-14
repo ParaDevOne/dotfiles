@@ -14,6 +14,9 @@ source ~/.config/zsh/aliases.zsh
 # 4. Keybindings
 source ~/.config/zsh/keybinds.zsh
 
+# 5. Zellij Autostart (NEW)
+source ~/.config/zsh/zellij.zsh
+
 # =============================================================================
 # Environment Setup
 # =============================================================================
@@ -70,5 +73,3 @@ fi
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
-
-start_if_needed
