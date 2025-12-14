@@ -309,6 +309,6 @@ themes {
 }
 
 theme "catppuccin-mocha"
-default_mode "normal"
+default_mode "locked"
 scrollback_editor "nvim"
 support_kitty_keyboard_protocol true

@@ -7,8 +7,11 @@
 if [[ -z "$ZELLIJ" ]] && [[ -o interactive ]]; then
     # Check if zellij is installed
     if command -v zellij &>/dev/null; then
-        # Launch Zellij and attach to default session, or create one
-        exec zellij attach -c default
+        # Create unique session name per terminal instance
+        SESSION_NAME="term-$"  # $ = PID del shell
+        
+        # Launch Zellij with unique session
+        exec zellij attach -c "$SESSION_NAME"
     fi
 fi
 
