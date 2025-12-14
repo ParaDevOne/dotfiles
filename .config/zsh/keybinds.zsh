@@ -6,25 +6,19 @@
 #   |_|\_\___|\__, |_.__/|_|_| |_|\__,_|_|_| |_|\__, |___/
 #             |___/                             |___/     
 #
-# Unified ZSH keybindings configuration
-# Performance: Single file load (~50ms vs 150ms modular)
-# Total bindings: 25+ shortcuts
+# ZSH keybindings
+# Total bindings: ~18 shortcuts
 # =============================================================================
 
 # =============================================================================
 # HISTORY NAVIGATION
 # =============================================================================
+# NOTE: Ctrl+R is handled by Atuin (loaded in .zshrc after this file)
+# We only keep basic arrow navigation for manual history browsing
 
-# Advanced multi-word history search (Ctrl+R)
-bindkey '^R' history-search-multi-word
-
-# Arrow key history navigation
+# Arrow key history navigation (basic fallback)
 bindkey '^[[A' up-line-or-history      # Up arrow
 bindkey '^[[B' down-line-or-history    # Down arrow
-
-# Ctrl+P/N history search
-bindkey '^P' history-search-backward
-bindkey '^N' history-search-forward
 
 # =============================================================================
 # WORD NAVIGATION
@@ -97,21 +91,24 @@ bindkey '^[[F' autosuggest-accept      # End key
 # This gives dual behavior: navigate OR accept suggestion progressively
 
 # =============================================================================
-# NOTES & CONFLICTS RESOLVED
+# KEYBINDING LAYERS & CONFLICTS
 # =============================================================================
 # 
-# RESOLVED CONFLICTS:
-# - Alt+S for sudo (was Esc Esc) → Avoids Zellij pane rename (Esc) conflict
-#
-# NO CONFLICTS WITH:
-# - Kitty: Uses Ctrl+Shift prefix exclusively
-# - Zellij: Uses Ctrl+B leader + Alt+hjkl for navigation
-#
-# LAYERS:
-# - Ctrl        → Shell operations (history, editing, kill)
-# - Alt         → Extensions (word nav, sudo prefix)
+# LAYER SEPARATION:
+# - Ctrl        → Shell operations (editing, navigation)
+# - Alt         → Shell extensions (sudo, word nav)
 # - Ctrl+Shift  → Terminal emulator (Kitty)
 # - Ctrl+B      → Multiplexer leader (Zellij)
-# - Alt+arrows  → Zellij global navigation
+# - Ctrl+R      → Atuin history search (loaded in .zshrc)
+#
+# NO CONFLICTS WITH:
+# - Atuin: Uses Ctrl+R (loaded AFTER this file in .zshrc)
+# - Kitty: Uses Ctrl+Shift prefix exclusively
+# - Zellij: Uses Ctrl+B leader + Alt+hjkl navigation
+#
+# REMOVED REDUNDANT BINDINGS:
+# - history-search-multi-word (replaced by Atuin)
+# - Ctrl+P/N history search (Atuin handles this)
+# - Ctrl+R binding (Atuin overrides it automatically)
 #
 # =============================================================================
