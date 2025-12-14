@@ -44,9 +44,6 @@ znap source Aloxaf/fzf-tab
 # You-should-use - Reminds you of aliases
 znap source MichaelAquilina/zsh-you-should-use
 
-# History search multi-word - Advanced history search
-znap source zdharma-continuum/history-search-multi-word
-
 # Auto-suggestions - Provides suggestions as you type
 znap source zsh-users/zsh-autosuggestions
 
@@ -63,7 +60,7 @@ znap source zdharma-continuum/fast-syntax-highlighting
 # Autosuggestions - Strategy and styling
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50000
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=10000
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # You-should-use - Message position and behavior
