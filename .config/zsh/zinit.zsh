@@ -1,36 +1,32 @@
 # =============================================================================
-# Znap - Plugin Manager
+# Zinit - Plugin Manager
 # =============================================================================
 
-# Check if zsh is running
-if [[ $SHELL != *zsh* ]]; then
-    echo "Warning: This configuration is optimized for zsh"
-fi
-
 # =============================================================================
-# Znap Installation
+# Zinit Installation
 # =============================================================================
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Download Znap if it doesn't exist
-if ! [[ -f ~/.config/zsh/plugins/zsh-snap/znap.zsh ]]; then
+# Instalar Zinit si no existe
+if [[ ! -d "$ZINIT_HOME" ]]; then
     if command -v git &> /dev/null; then
-        echo "Installing Znap..."
-        if git clone --depth 1 -- \
-            https://github.com/marlonrichert/zsh-snap.git ~/.config/zsh/plugins/zsh-snap; then
-            echo "✓ Znap installed"
+        echo "Instalando Zinit..."
+        if mkdir -p "$(dirname $ZINIT_HOME)" && \
+           git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"; then
+            echo "✓ Zinit instalado"
         else
-            echo "✗ Failed to install Znap" >&2
+            echo "✗ Error instalando Zinit" >&2
             return 1
         fi
     else
-        echo "Error: git is required to install Znap" >&2
+        echo "✗ Se necesita git para instalar Zinit" >&2
         return 1
     fi
 fi
 
-# Verificar que el source funcionó
-if ! source ~/.config/zsh/plugins/zsh-snap/znap.zsh; then
-    echo "Error: Failed to load Znap" >&2
+# Verificar que el source funciona
+if ! source "${ZINIT_HOME}/zinit.zsh"; then
+    echo "✗ Error cargando Zinit" >&2
     return 1
 fi
 
@@ -38,21 +34,41 @@ fi
 # Plugins
 # =============================================================================
 
-# fzf-tab - Fuzzy tab completion
-znap source Aloxaf/fzf-tab
+# Powerlevel10k - Theme for Zsh
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+
+# fzf-tab - Fuzzy tab completion (debe cargar ANTES de completions)
+zinit ice wait lucid
+zinit light Aloxaf/fzf-tab
 
 # You-should-use - Reminds you of aliases
-znap source MichaelAquilina/zsh-you-should-use
+zinit ice wait lucid
+zinit light MichaelAquilina/zsh-you-should-use
 
 # Auto-suggestions - Provides suggestions as you type
-znap source zsh-users/zsh-autosuggestions
+zinit ice wait lucid atload'_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
 
 # Completions - Extended completions for many commands
-znap source zsh-users/zsh-completions
+zinit ice wait lucid blockf atpull'zinit creinstall -q .'
+zinit light zsh-users/zsh-completions
 
-# Fast syntax highlighting - Syntax highlighting while typing
-znap source zdharma-continuum/fast-syntax-highlighting
+# Fast syntax highlighting - DEBE IR ÚLTIMO
+zinit ice wait lucid atinit'ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
+zinit light zdharma-continuum/fast-syntax-highlighting
 
+
+# Add in snippets
+zinit ice wait lucid
+zinit snippet OMZP::git
+
+zinit ice wait lucid
+zinit snippet OMZP::sudo
+
+zinit ice wait lucid
+zinit snippet OMZP::command-not-found
 # =============================================================================
 # Plugin Configuration
 # =============================================================================
@@ -73,7 +89,7 @@ export YSU_MODE=ALL
 # =============================================================================
 
 # Syntax highlighting options
-typeset -A FAST_HIGHLIGHT_STYLES=(
+typeset -gA FAST_HIGHLIGHT_STYLES=(
     default 'fg=none,bold=no'
     unknown-token 'fg=red,bold=1'
     reserved-word 'fg=yellow,bold=1'

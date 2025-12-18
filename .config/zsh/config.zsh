@@ -141,7 +141,7 @@ if command -v fzf &> /dev/null; then
         fzf --zsh > ~/.config/zsh/fzf.zsh
     fi
     source ~/.config/zsh/fzf.zsh
-    
+
     export FZF_DEFAULT_OPTS="
         --height 40%
         --layout=reverse
@@ -152,7 +152,7 @@ if command -v fzf &> /dev/null; then
         --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6
         --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4
     "
-    
+
     if command -v fd &> /dev/null; then
         export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
         export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

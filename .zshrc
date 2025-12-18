@@ -16,11 +16,6 @@ source ~/.config/zsh/init.zsh
 # External Tools Initialization
 # =============================================================================
 
-# Starship prompt
-if command -v starship &> /dev/null; then
-    eval "$(starship init zsh)"
-fi
-
 # FZF (fuzzy finder)
 if command -v fzf &> /dev/null; then
     eval "$(fzf --zsh)"
