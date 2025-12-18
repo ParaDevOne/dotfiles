@@ -199,7 +199,7 @@
   "workbench.navigationControl.enabled": false,
   "workbench.productIconTheme": "fluent-icons",
   "workbench.startupEditor": "none",
-  "workbench.statusBar.visible": true,
+  "workbench.statusBar.visible": false,
   "workbench.tips.enabled": false,
   "workbench.tree.enableStickyScroll": true,
   "workbench.tree.indent": 8,
