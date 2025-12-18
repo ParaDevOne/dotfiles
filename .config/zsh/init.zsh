@@ -6,16 +6,13 @@
 source ~/.config/zsh/config.zsh
 
 # 2. Plugins
-source ~/.config/zsh/znap.zsh
+source ~/.config/zsh/zinit.zsh
 
 # 3. Aliases
 source ~/.config/zsh/aliases.zsh
 
 # 4. Keybindings
 source ~/.config/zsh/keybinds.zsh
-
-# 5. Zellij Autostart
-source ~/.config/zsh/zellij.zsh
 
 # =============================================================================
 # Environment Setup
@@ -27,13 +24,6 @@ export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/lib/ccache/bin:$PATH"
 # Editor configuration
 export EDITOR=nano
 export VISUAL=code
-
-# =============================================================================
-# Terminal & Display
-# =============================================================================
-
-# Enable colors in less
-export LESS="-R"
 
 # =============================================================================
 # FZF Configuration
