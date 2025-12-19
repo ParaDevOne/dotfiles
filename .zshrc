@@ -18,19 +18,16 @@ fi
 # Modular Configuration
 # =============================================================================
 
-# 1. Load the main initialization script
-source ~/.config/zsh/init.zsh
-
-# 2. Config
+# 1. Config
 source ~/.config/zsh/config.zsh
 
-# 3. Plugins
+# 2. Plugins
 source ~/.config/zsh/zinit.zsh
 
-# 4. Aliases
+# 3. Aliases
 source ~/.config/zsh/aliases.zsh
 
-# 5. Keybindings
+# 4. Keybindings
 source ~/.config/zsh/keybinds.zsh
 
 # =============================================================================

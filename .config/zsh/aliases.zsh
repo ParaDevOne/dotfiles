@@ -31,7 +31,6 @@ alias suspend='systemctl suspend'
 
 # Sudo
 alias root='sudo su'
-alias please='sudo'
 alias fucking='sudo'
 
 # =============================================================================
