@@ -21,11 +21,8 @@ setopt EXTENDED_HISTORY          # Saves timestamps
 setopt INC_APPEND_HISTORY        # Writes immediately
 setopt SHARE_HISTORY             # Shares between sessions
 setopt HIST_EXPIRE_DUPS_FIRST    # Deletes duplicates first when cleaning
-setopt HIST_IGNORE_DUPS          # Doesn't save consecutive duplicates
-setopt HIST_IGNORE_ALL_DUPS      # Deletes old duplicates
 setopt HIST_FIND_NO_DUPS         # Doesn't show duplicates in search
 setopt HIST_IGNORE_SPACE         # Ignores if starts with space
-setopt HIST_SAVE_NO_DUPS         # Doesn't write duplicates to file
 setopt HIST_REDUCE_BLANKS        # Cleans extra spaces
 setopt HIST_VERIFY               # Confirms before executing !command
 
