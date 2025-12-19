@@ -5,7 +5,6 @@
 #  _ / /\__ \ | | | | | (__
 # (_)___|___/_| |_|_|  \___|
 #
-# Performance: ~62ms startup (482 líneas modulares)
 # Last benchmark: 2025-12-03
 # -----------------------------------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -18,7 +17,21 @@ fi
 # =============================================================================
 # Modular Configuration
 # =============================================================================
+
+# 1. Load the main initialization script
 source ~/.config/zsh/init.zsh
+
+# 2. Config
+source ~/.config/zsh/config.zsh
+
+# 3. Plugins
+source ~/.config/zsh/zinit.zsh
+
+# 4. Aliases
+source ~/.config/zsh/aliases.zsh
+
+# 5. Keybindings
+source ~/.config/zsh/keybinds.zsh
 
 # =============================================================================
 # External Tools Initialization
