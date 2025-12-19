@@ -2,12 +2,16 @@
 # ZSH Configuration
 # =============================================================================
 
+# PATH
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/lib/ccache/bin:$PATH"
+
 # =============================================================================
 # History
 # =============================================================================
 HISTFILE=~/.config/zsh/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+HISTDUP=erase
 
 # =============================================================================
 # History Options
@@ -85,6 +89,10 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# Editor configuration
+export EDITOR=nano
+export VISUAL=code
 
 # =============================================================================
 # Completions System
@@ -214,4 +222,13 @@ if command -v fzf &> /dev/null; then
         export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
         export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     fi
+fi
+
+# =============================================================================
+# Development Tools
+# =============================================================================
+
+# Rust/Cargo configuration
+if [[ -f "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
 fi
