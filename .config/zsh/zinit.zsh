@@ -34,41 +34,28 @@ fi
 # Plugins
 # =============================================================================
 
-# Powerlevel10k - Theme for Zsh
-# Add in Powerlevel10k
+# Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-
-# fzf-tab - Fuzzy tab completion (debe cargar ANTES de completions)
-zinit ice wait lucid
-zinit light Aloxaf/fzf-tab
-
-# You-should-use - Reminds you of aliases
-zinit ice wait lucid
-zinit light MichaelAquilina/zsh-you-should-use
-
-# Auto-suggestions - Provides suggestions as you type
-zinit ice wait lucid atload'_zsh_autosuggest_start'
-zinit light zsh-users/zsh-autosuggestions
+# Fzf-tab - Fuzzy completion for Zsh using fzf
+zinit ice wait lucid; zinit light Aloxaf/fzf-tab
 
 # Completions - Extended completions for many commands
 zinit ice wait lucid blockf atpull'zinit creinstall -q .'
 zinit light zsh-users/zsh-completions
 
-# Fast syntax highlighting - DEBE IR ÚLTIMO
+# Auto-suggestions - Provides suggestions as you type
+zinit ice wait lucid atload'_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
+
+# Fast syntax highlighting
 zinit ice wait lucid atinit'ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
 zinit light zdharma-continuum/fast-syntax-highlighting
 
+# Snippets
+zinit ice wait lucid; zinit snippet OMZP::git
+zinit ice wait lucid; zinit snippet OMZP::sudo
 
-# Add in snippets
-zinit ice wait lucid
-zinit snippet OMZP::git
-
-zinit ice wait lucid
-zinit snippet OMZP::sudo
-
-zinit ice wait lucid
-zinit snippet OMZP::command-not-found
 # =============================================================================
 # Plugin Configuration
 # =============================================================================
@@ -78,11 +65,6 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=10000
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
-
-# You-should-use - Message position and behavior
-export YSU_MESSAGE_POSITION="after"
-export YSU_HARDCORE=0
-export YSU_MODE=ALL
 
 # =============================================================================
 # Fast Syntax Highlighting Configuration
