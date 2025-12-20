@@ -439,4 +439,4 @@ MIT License - Feel free to use and modify.
 **Maintained by**: [@ParaDevOne](https://github.com/ParaDevOne)
 **Last Updated**: 2025-12-19
 **ZSH Startup**: ~63ms (real), <10ms (perceived with P10K)
-**Tested on**: Arch Linux + Garuda Linux
+**Tested on**: EndeavourOS (Arch-based)
