@@ -1,319 +1,442 @@
 # Linux Desktop Dotfiles
 
-Modern, modular configuration for Linux desktop with optimized zsh shell, kitty terminal, and system utilities. **Startup ZSH performance: ~150ms**.
+Modern, modular configuration for Arch Linux desktop with optimized ZSH shell, Kitty terminal, and developer tools. **ZSH startup: ~63ms** with instant prompt.
 
-## 📋 Prerequisites
+## 📋 Overview
 
-### System Requirements
-
-- **Linux** (tested on Arch Linux, works on based distro)
-- **zsh 5.9+** (shell)
-- **git** (for cloning and plugin management)
+Highly optimized dotfiles featuring:
+- ⚡ **Fast startup**: ~63ms ZSH with P10K instant prompt (<10ms perceived)
+- 🎨 **Catppuccin Macchiato** theme across all tools
+- 🔧 **Modular architecture**: Easy to customize and maintain
+- 🚀 **Modern CLI tools**: eza, bat, fzf, zoxide, ripgrep
+- 🔑 **Advanced keybindings**: ~80 shortcuts without conflicts
 
 ---
 
-## 🛠️ Required Tools
+## 🛠️ Prerequisites
 
-### Core Shell & Terminal
+### System Requirements
+- **OS**: Arch Linux (or Arch-based distros)
+- **Shell**: zsh 5.9+
+- **Package Manager**: pacman + AUR helper (yay/paru)
 
-| Tool | Version | Purpose | Install |
-|------|---------|---------|---------|
-| **zsh** | 5.9+ | Shell runtime | `sudo pacman -S zsh` |
-| **kitty** | latest | Terminal emulator | `sudo pacman -S kitty` |
+### Core Dependencies
 
-### Plugin Managers & ZSH Extensions
+```bash
+# Essential
+sudo pacman -S zsh git kitty
 
-| Tool | Purpose | Install |
-|------|---------|----------|
-| **Znap** | Plugin manager (simpler & faster) | Auto-installed on first `.zshrc` load |
-| **zsh-autosuggestions** | Command suggestions | `znap` (auto) |
-| **zsh-completions** | Extended completions | `znap` (auto) |
-| **fast-syntax-highlighting** | Syntax highlighting | `znap` (auto) |
-| **fzf-tab** | Fuzzy tab completion | `znap` (auto) |
-| **history-search-multi-word** | Advanced history search | `znap` (auto) |
-| **zsh-you-should-use** | Alias reminders | `znap` (auto) |
+# CLI Tools
+sudo pacman -S eza fzf bat fd ripgrep zoxide atuin
 
-### Tools for Enhanced Shell Experience (CLI Utilities)
+# Development
+sudo pacman -S hyperfine # For benchmarking
+```
 
-| Tool | Purpose | Install |
-|------|---------|----------|
-| **eza** | Modern `ls` replacement | `sudo pacman -S eza` |
-| **fzf** | Fuzzy finder | `sudo pacman -S fzf` |
-| **bat** | cat with syntax highlighting | `sudo pacman -S bat` |
-| **zoxide** | cd replacement with history | `sudo pacman -S zoxide` |
-| **Starship** | Prompt customization | `sudo pacman -S starship` |
+---
 
-### System Utilities
-
-| Tool | Purpose | Install |
-|------|---------|----------|
-| **fastfetch** | System info display | `sudo pacman -S fastfetch` |
-| **qt6ct** | Qt6 theme manager | `sudo pacman -S qt6ct` |
-| **nano** | Text editor | `sudo pacman -S nano` |
-| **code** | Text editor | `yay/paru visual-studio-code-bin` |
-
-## ⚡ Quick Start
+## 🚀 Quick Install
 
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/ParaDevOne/dotfiles-plasma ~/.config/dotfiles
-cd ~/.config/dotfiles
+git clone https://github.com/ParaDevOne/dotfiles-plasma ~/.dotfiles
+cd ~/.dotfiles
 ```
 
-### 2. Install Core Tools
+### 2. Backup Existing Config
 
 ```bash
-# Arch Linux
-sudo pacman -S zsh kitty eza fzf bat zoxide starship fastfetch qt6ct --noconfirm
+# Create backup
+mkdir -p ~/.config/backup_$(date +%Y%m%d)
+[[ -f ~/.zshrc ]] && cp ~/.zshrc ~/.config/backup_$(date +%Y%m%d)/
+[[ -d ~/.config/zsh ]] && cp -r ~/.config/zsh ~/.config/backup_$(date +%Y%m%d)/
+[[ -d ~/.config/kitty ]] && cp -r ~/.config/kitty ~/.config/backup_$(date +%Y%m%d)/
 ```
 
-### 3. Install Dotfiles
+### 3. Install Dependencies
 
 ```bash
-# Backup existing config (optional)
-mkdir -p ~/.config/backup
-[[ -f ~/.zshrc ]] && cp ~/.zshrc ~/.config/backup/
-[[ -d ~/.config/zsh ]] && cp -r ~/.config/zsh ~/.config/backup/
+# Core tools
+sudo pacman -S zsh kitty eza fzf bat fd ripgrep zoxide atuin hyperfine
 
-# Link dotfiles
-ln -sf ~/.config/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/.config/dotfiles/.config/zsh ~/.config/
-ln -sf ~/.config/dotfiles/.config/kitty ~/.config/
-ln -sf ~/.config/dotfiles/.config/fastfetch ~/.config/
+# Optional but recommended
+sudo pacman -S lazygit fastfetch xclip
+
+# Set ZSH as default shell
+chsh -s $(which zsh)
 ```
 
-### 4. Initialize ZSH
+### 4. Deploy Dotfiles
 
 ```bash
-# Change default shell
-chsh -s /usr/bin/zsh
+# Link configs
+ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+ln -sf ~/.dotfiles/.zprofile ~/.zprofile
+ln -sf ~/.dotfiles/.config/zsh ~/.config/
+ln -sf ~/.dotfiles/.config/kitty ~/.config/
+ln -sf ~/.dotfiles/.config/atuin ~/.config/
+ln -sf ~/.dotfiles/.config/fastfetch ~/.config/
+```
 
-# Open new terminal or reload
+### 5. Initialize
+
+```bash
+# Logout and login (for shell change)
+# Or open new terminal
 zsh
 
-source ~/.zshrc
+# Zinit will auto-install on first load
+# P10K configuration wizard will run automatically
+p10k configure
 ```
 
 ---
 
-## 📁 Directory Structure
+## 📁 Structure
 
-```txt
-dotfiles/
-├── .zshrc                      # Entry point (sources modular configs)
+```
+~/.dotfiles/
+├── .zshrc                          # Entry point + P10K instant prompt
+├── .zprofile                       # Login shell (Wayland, XDG, PATH)
 ├── .config/
 │   ├── zsh/
-│   │   ├── init.zsh           # PATH, env vars (LOAD FIRST)
-│   │   ├── config.zsh         # Zsh options, history, completions
-│   │   ├── znap.zsh           # Plugin manager (auto-install)
-│   │   ├── aliases.zsh        # Command aliases
-│   │   └── keybindings.zsh    # Keyboard shortcuts
+│   │   ├── config.zsh             # Options, history, completions, FZF
+│   │   ├── zinit.zsh              # Plugin manager + plugins
+│   │   ├── aliases.zsh            # Command aliases (~50)
+│   │   └── keybinds.zsh           # ZSH keybindings (~38)
 │   ├── kitty/
-│   │   ├── kitty.conf         # Main configuration
-│   │   ├── theme.conf         # Catppuccin Macchiato theme
-│   │   └── keybindings.conf   # Terminal keybindings
-│   ├── fastfetch/
-│   │   └── config.jsonc       # System info display config
-│   └── qt6ct/
-│       └── qt6ct.conf         # Qt6 theme settings
-└── README.md                  # This file
+│   │   ├── kitty.conf             # Main config + theme
+│   │   ├── kittysession.conf      # Startup tabs
+│   │   └── keybindings.conf       # Terminal shortcuts (~80)
+│   ├── atuin/
+│   │   └── config.toml            # Enhanced history search
+│   └── fastfetch/
+│       └── config.jsonc           # System info display
+└── README.md
 ```
 
 ---
 
-## 🚀 Performance Optimization
+## ⚡ Performance
 
-### Shell Startup Time
+### Benchmark Results
 
 ```bash
-# Benchmark startup
-time zsh -i -c exit
+# Full startup (with all plugins)
+❯ hyperfine 'zsh -i -c exit'
+Time (mean ± σ):      63.5 ms ±   0.5 ms
 
-# Debug plugin loading
-znap list
+# Perceived startup (P10K instant prompt)
+< 10ms (prompt visible immediately)
 ```
 
-**Target**: ~150ms with all plugins loaded
+### Optimization Techniques
 
-### Performance Strategy
+1. **P10K Instant Prompt**: Renders prompt from cache before loading config
+2. **Zinit Turbo Mode**: Defers non-critical plugins with `wait lucid`
+3. **Compinit Caching**: Only regenerates on `.zshrc` changes
+4. **Smart Plugin Loading**: Minimal plugin set, aggressive caching
 
-- **Synchronous loading**: Znap sources plugins sequentially without delay
-- **Early syntax highlighting**: fast-syntax-highlighting loads before other plugins
-- **Syntax highlighting**: Loads synchronously before other plugins
-- **Auto-completion**: Loads on-demand
-
----
-
-## ⌨️ Keyboard Shortcuts
-
-All keybindings are centralized and documented in **[`.config/KEYBINDINGS.md`](.config/KEYBINDINGS.md)** for easy reference.
-
-### Quick Overview
-
-| Tool | Keybindings | Documentation |
-|------|-------------|---|
-| **ZSH** | History, navigation, editing | [ZSH Keybindings](.config/KEYBINDINGS.md#zsh-shell-keybindings) |
-| **Kitty** | Tab/window management, copy/paste | [Kitty Keybindings](.config/KEYBINDINGS.md#kitty-terminal-keybindings) |
-| **Zellij** | Pane/tab management, navigation | [Zellij Keybindings](.config/KEYBINDINGS.md#zellij-terminal-multiplexer-keybindings) |
-
-### Key Changes & Resolutions
-
-- ✅ **Alt+S**: Sudo prefix (changed from deprecated `Esc Esc` to avoid Zellij conflicts)
-- ✅ **Alt+hjkl**: Vim-style navigation in Zellij
-- ✅ **Ctrl+Shift**: Universal Kitty prefix (avoids shell conflicts)
-
-### Validation
-
-Run keybindings validation:
+### Performance Profiling
 
 ```bash
-./check-keybindings.sh
+# Detailed profiling
+zsh -i -c 'zmodload zsh/zprof && source ~/.zshrc && zprof' | head -20
+
+# Benchmark
+hyperfine --warmup 3 'zsh -i -c exit'
 ```
 
 ---
 
-## ⚙️ Configuration
+## 🔧 Configuration
 
-### Customize Aliases
+### ZSH Plugins (Zinit)
 
-Edit `~/.config/zsh/aliases.zsh`:
+Installed automatically on first load:
 
-```bash
-alias mycommand='actual command'
-```
+| Plugin                       | Purpose              | Load Mode             |
+| ---------------------------- | -------------------- | --------------------- |
+| **powerlevel10k**            | Prompt theme         | Sync (instant prompt) |
+| **fzf-tab**                  | Fuzzy completions    | Turbo                 |
+| **zsh-completions**          | Extended completions | Turbo                 |
+| **zsh-autosuggestions**      | Command suggestions  | Turbo                 |
+| **fast-syntax-highlighting** | Syntax colors        | Turbo (last)          |
+| **OMZ::git**                 | Git aliases          | Turbo                 |
+| **OMZ::sudo**                | Alt+S for sudo       | Turbo                 |
 
-### Add Keybindings
+### Customize Plugins
 
-ZSH keybindings are now **modularized** for better maintainability:
-
-- **History navigation**: `~/.config/zsh/keybinds/history.zsh`
-- **Word navigation**: `~/.config/zsh/keybinds/navigation.zsh`
-- **Line editing**: `~/.config/zsh/keybinds/editing.zsh`
-- **System utilities**: `~/.config/zsh/keybinds/system.zsh`
-
-To add a new keybinding, edit the appropriate module or create a new one and source it in `~/.config/zsh/keybinds.zsh`.
-
-Example (add to `~/.config/zsh/keybinds/custom.zsh`):
+Edit `~/.config/zsh/zinit.zsh`:
 
 ```bash
-bindkey '^X' my-function
+# Add new plugin
+zinit ice wait lucid
+zinit light owner/repo
 ```
 
-Then add to `~/.config/zsh/keybinds.zsh`:
+### Aliases
 
+**Navigation:**
 ```bash
-source "$KEYBINDS_DIR/custom.zsh"
+..     → cd ..
+...    → cd ../..
+cd     → zi (zoxide)
 ```
 
-For **Kitty** keybindings, edit `~/.config/kitty/keybindings.conf`.
-
-For **Zellij** keybindings, edit `~/.config/Code/User/zellij/config.kdl`.
-
-**Important:** After any keybinding changes, test with the validation script:
-
+**File Listing:**
 ```bash
-./check-keybindings.sh
+ls     → eza -a --icons --group-directories-first
+ll     → eza -al --icons --git
+lt     → eza --tree --level=2
 ```
 
-### Add Zsh Plugins
-
-Edit `~/.config/zsh/znap.zsh`:
-
+**Development:**
 ```bash
-znap source owner/plugin-name
+lg     → lazygit
+code   → code . (VSCode)
+v/vi   → $EDITOR
 ```
 
-### Customize Terminal Theme
+**System:**
+```bash
+update → sudo pacman -Syu
+install → sudo pacman -S
+remove  → sudo pacman -Rns
+```
 
-Edit `~/.config/kitty/theme.conf` (supports all Catppuccin variants)
+Full list: `~/.config/zsh/aliases.zsh`
 
 ---
 
-## 🧪 Validation & Troubleshooting
+## ⌨️ Keybindings
 
-### Validate Shell Config
+### ZSH Shortcuts
 
+**History:**
+- `Ctrl+R` → Atuin fuzzy search
+- `Up/Down` → Navigate history
+- `Ctrl+P/N` → Navigate history (alt)
+- `PageUp/Down` → Search history with current input
+
+**Navigation:**
+- `Ctrl+A/E` → Line start/end
+- `Ctrl+←/→` → Word navigation
+- `Alt+F/B` → Word navigation (emacs-style)
+
+**Editing:**
+- `Ctrl+W` → Delete word backward
+- `Ctrl+K` → Kill to end of line
+- `Ctrl+U` → Kill to start of line
+- `Ctrl+Z/Y` → Undo/Redo
+- `Alt+U/L/C` → Uppercase/Lowercase/Capitalize word
+
+**Utilities:**
+- `Alt+S` → Prepend/remove sudo
+- `Ctrl+L` → Clear screen
+- `Alt+.` → Insert last argument
+- `Ctrl+X Ctrl+E` → Edit command in $EDITOR
+
+Full reference: `~/.config/zsh/keybinds.zsh`
+
+### Kitty Shortcuts
+
+**Tabs:**
+- `Ctrl+Shift+T` → New tab (with CWD)
+- `Ctrl+Shift+W` → Close tab
+- `Ctrl+Shift+→/←` → Navigate tabs
+- `Ctrl+Shift+1-5` → Go to tab N
+
+**Windows:**
+- `Ctrl+Shift+Enter` → New window (with CWD)
+- `Ctrl+Shift+]/[` → Navigate windows
+- `Ctrl+Shift+R` → Resize mode
+
+**Layouts:**
+- `Ctrl+Shift+L` → Cycle layouts
+- `Ctrl+Alt+Z` → Toggle fullscreen (stack)
+
+**Hints (keyboard selection):**
+- `Ctrl+Shift+E` → Open URLs
+- `Ctrl+Shift+P>F` → Select paths
+- `Ctrl+Shift+P>L` → Select lines
+- `Ctrl+Shift+P>H` → Select git hashes
+
+Full reference: `~/.config/kitty/keybindings.conf`
+
+---
+
+## 🎨 Theming
+
+### Active Theme: Catppuccin Macchiato
+
+- **Kitty**: `~/.config/kitty/kitty.conf` (includes theme.conf)
+- **P10K**: Generated via `p10k configure`
+- **FZF**: Dracula colors in `~/.config/zsh/config.zsh`
+
+### Change Theme
+
+**Kitty:**
 ```bash
-# Test shell load
-zsh -c "source ~/.zshrc && echo SUCCESS"
+# Download new theme
+cd ~/.config/kitty
+curl -O https://raw.githubusercontent.com/catppuccin/kitty/main/themes/mocha.conf
+
+# Update kitty.conf
+include ./mocha.conf
 ```
 
-### Test Shell Loading
-
+**P10K:**
 ```bash
-zsh -c "source ~/.zshrc && echo SUCCESS"
+p10k configure
 ```
 
-### Debug Startup Issues
+---
+
+## 🧪 Testing & Validation
+
+### Test Configuration
 
 ```bash
+# Syntax check
+zsh -n ~/.zshrc
+
+# Full load test
+zsh -c "source ~/.zshrc && echo '✓ Config loaded successfully'"
+
 # Check for errors
-zsh -x ~/.zshrc 2>&1 | head -50
-
-# List loaded plugins
-znap list
+zsh -x ~/.zshrc 2>&1 | grep -i error
 ```
+
+### Benchmark
+
+```bash
+# Simple benchmark
+for i in {1..10}; do time zsh -i -c exit; done 2>&1 | grep real
+
+# Precise benchmark (requires hyperfine)
+hyperfine --warmup 3 'zsh -i -c exit'
+```
+
+### Debug Slow Startup
+
+```bash
+# Profile with zprof
+zsh -i -c 'zmodload zsh/zprof && source ~/.zshrc && zprof' | head -20
+
+# Check plugin load times
+zinit times
+```
+
+---
+
+## 🔧 Tools Reference
+
+### Core Tools
+
+| Tool              | Purpose        | Config                        |
+| ----------------- | -------------- | ----------------------------- |
+| **zsh**           | Shell          | `~/.zshrc`, `~/.config/zsh/`  |
+| **zinit**         | Plugin manager | `~/.config/zsh/zinit.zsh`     |
+| **powerlevel10k** | Prompt         | `~/.p10k.zsh`                 |
+| **kitty**         | Terminal       | `~/.config/kitty/`            |
+| **atuin**         | History search | `~/.config/atuin/config.toml` |
+
+### CLI Utilities
+
+| Tool        | Replaces | Usage                                |
+| ----------- | -------- | ------------------------------------ |
+| **eza**     | ls       | `ls`, `ll`, `lt`                     |
+| **bat**     | cat      | `cat`, `ccat`                        |
+| **fd**      | find     | `fd <pattern>`                       |
+| **ripgrep** | grep     | `rg <pattern>`                       |
+| **zoxide**  | cd       | `z <dir>`, aliased to `cd`           |
+| **fzf**     | -        | Fuzzy finder (Ctrl+T, Ctrl+R, Alt+C) |
+| **atuin**   | history  | Enhanced history (Ctrl+R)            |
+
+---
+
+## 🆘 Troubleshooting
 
 ### Common Issues
 
-### Error: "bad set of key/value pairs for associative array"
-
-- Check `~/.config/zsh/*.zsh` for `export ARRAY=()` instead of `typeset -A ARRAY=()`
-
-### Slow startup time
-
-- Profile: `time zsh -i -c exit`
-- Check plugin load order in `znap.zsh`
-- Disable unnecessary plugins
-
-### Keybindings not working
-
-- Test in kitty terminal: `kitty` (supports shell integration)
-- Check conflict with other key bindings
-- Run: `./check-keybindings.sh` to validate configuration
-- Review: `.config/KEYBINDINGS.md` for conflict documentation
-
----
-
-## 📚 External Tool Documentation
-
-- **Znap**: <https://github.com/marlonrichert/zsh-snap>
-- **Kitty**: <https://sw.kovidgoyal.net/kitty/>
-- **fzf**: <https://github.com/junegunn/fzf>
-- **Starship**: <https://starship.rs/>
-- **Catppuccin**: <https://catppuccin.com/>
-
----
-
-## 🔧 Manual Installation (if auto-install fails)
-
-### Znap (Plugin Manager)
-
+**Plugins not loading:**
 ```bash
-git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git ~/.config/zsh/plugins/zsh-snap
+# Reinstall Zinit
+rm -rf ~/.local/share/zinit
+source ~/.zshrc
 ```
 
-### Rust Tools
-
+**P10K not showing:**
 ```bash
-# Install Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Reconfigure
+p10k configure
 
-# Then install tools if needed
-# Alternative: Via Arch Linux pacman (system packages)
-sudo pacman -S zsh kitty eza fzf bat zoxide thefuck starship fastfetch --noconfirm
+# Check instant prompt cache
+ls -la ~/.cache/p10k-instant-prompt-*
 ```
 
-## 🆘 Support
+**Slow startup after adding plugins:**
+```bash
+# Profile
+zsh -i -c 'zmodload zsh/zprof && source ~/.zshrc && zprof'
 
-If something breaks:
+# Check compinit dump
+ls -la ~/.config/zsh/.zcompdump
+```
 
-1. Check `.github/copilot-instructions.md` for architecture details
-2. Validate shell config: `zsh -c "source ~/.zshrc && echo OK"`
-3. Test shell: `zsh -c "source ~/.zshrc && echo OK"`
-4. Check errors: `zsh -x ~/.zshrc 2>&1 | grep -i error`
+**Keybinding conflicts:**
+```bash
+# List all bindings
+bindkey
+
+# Test specific binding
+bindkey '^R'  # Should show: atuin
+```
+
+### Reset to Defaults
+
+```bash
+# Remove all configs
+rm -rf ~/.zshrc ~/.zprofile ~/.config/zsh ~/.config/kitty ~/.config/atuin ~/.p10k.zsh
+
+# Reinstall
+cd ~/.dotfiles
+./install.sh  # (if you create an install script)
+```
 
 ---
 
-**Last Updated**: 2025-12-1 | **Startup Time**: ~150ms | **Shell**: zsh 5.9+
+## 📚 Documentation
+
+- **Zinit**: https://github.com/zdharma-continuum/zinit
+- **Powerlevel10k**: https://github.com/romkatv/powerlevel10k
+- **Kitty**: https://sw.kovidgoyal.net/kitty/
+- **Atuin**: https://atuin.sh/
+- **FZF**: https://github.com/junegunn/fzf
+- **Catppuccin**: https://catppuccin.com/
+
+---
+
+## 🤝 Contributing
+
+Found a bug or have a suggestion? Open an issue or PR!
+
+**Before submitting:**
+1. Test on fresh Arch Linux install
+2. Benchmark startup time: `hyperfine 'zsh -i -c exit'`
+3. Check for conflicts: Run all keybindings
+
+---
+
+## 📄 License
+
+MIT License - Feel free to use and modify.
+
+---
+
+**Maintained by**: [@ParaDevOne](https://github.com/ParaDevOne)
+**Last Updated**: 2025-12-19
+**ZSH Startup**: ~63ms (real), <10ms (perceived with P10K)
+**Tested on**: Arch Linux + Garuda Linux

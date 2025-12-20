@@ -5,7 +5,6 @@
 #  _ / /\__ \ | | | | | (__
 # (_)___|___/_| |_|_|  \___|
 #
-# Last benchmark: 2025-12-03
 # -----------------------------------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
