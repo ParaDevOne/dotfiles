@@ -74,18 +74,18 @@ setopt NOTIFY                    # Notifies when job finishes
 # Color support & locale
 export TERM="xterm-256color"
 export COLORTERM="truecolor"
-export LANG=es_ES.UTF-8
-export LC_ALL=es_ES.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Less with colors
-export LESS='-R --mouse'
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS='-R --mouse --incsearch'
+export LESS_TERMCAP_mb=$'\e[1;31m'
+export LESS_TERMCAP_md=$'\e[1;36m'
 export LESS_TERMCAP_me=$'\e[0m'
 export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_so=$'\e[30;43m'
 export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+export LESS_TERMCAP_us=$'\e[4;32m'
 
 # Editor configuration
 export EDITOR=nano
@@ -209,10 +209,10 @@ if command -v fzf &> /dev/null; then
         --layout=reverse
         --border
         --inline-info
-        --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9
-        --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9
-        --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6
-        --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4
+        --color=fg:#cad3f5,bg:#24273a,hl:#ed8796
+        --color=fg+:#cad3f5,bg+:#363a4f,hl+:#ed8796
+        --color=info:#c6a0f6,prompt:#a6da95,pointer:#f4dbd6
+        --color=marker:#f4dbd6,spinner:#f5a97f,header:#8aadf4
     "
 
     if command -v fd &> /dev/null; then

@@ -54,7 +54,7 @@ if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
     export AWT_TOOLKIT=MToolkit
 
     # SDL (games/media)
-    export SDL_VIDEODRIVER=wayland
+    export SDL_VIDEODRIVER=wayland,x11
 
     # Clutter/EFL (legacy toolkits)
     export CLUTTER_BACKEND=wayland
