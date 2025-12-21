@@ -5,7 +5,6 @@
 # =============================================================================
 # Navigation & Listing
 # =============================================================================
-alias cd='zi'                                           # Use zoxide instead of cd
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -31,6 +30,7 @@ alias suspend='systemctl suspend'
 
 # Sudo
 alias root='sudo su'
+alias please='sudo'
 alias fucking='sudo'
 
 # =============================================================================
@@ -60,7 +60,6 @@ alias e='$EDITOR'
 # Quick config edits
 alias zshconfig='$EDITOR ~/.zshrc'
 alias aliasconfig='$EDITOR ~/.config/zsh/aliases.zsh'
-alias nvimconfig='$EDITOR ~/.config/nvim/'
 
 # =============================================================================
 # Development
@@ -68,7 +67,8 @@ alias nvimconfig='$EDITOR ~/.config/nvim/'
 
 # VSCode
 alias code='code .'
-alias c.='code .'
+alias code_extensions='code --list-extensions'
+alias code_disable_extension='code --disable-extensions'
 
 # Diff-so-fancy integration
 if command -v diff-so-fancy &> /dev/null; then
