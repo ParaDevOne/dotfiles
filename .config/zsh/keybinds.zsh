@@ -110,7 +110,23 @@ bindkey '^[f' forward-word                 # Alt+F (accept word by word)
 # =============================================================================
 
 bindkey '^L' clear-screen                  # Clear screen
-bindkey '^[s' sudo-command-line            # Alt+S (prepend sudo from OMZ plugin)
+
+# ============================================================================
+# Sudo Command Line Prepend
+# ===========================================================================
+
+sudo-command-line() {
+  if [[ -z $BUFFER ]]; then
+    BUFFER="sudo "
+  elif [[ $BUFFER != sudo\ * ]]; then
+    BUFFER="sudo $BUFFER"
+  fi
+  CURSOR=${#BUFFER}
+}
+
+zle -N sudo-command-line
+
+bindkey '^[s' sudo-command-line           # Alt+S
 
 # =============================================================================
 # FZF Integration
@@ -152,8 +168,7 @@ bindkey '^[s' sudo-command-line            # Alt+S (prepend sudo from OMZ plugin
 #   Ctrl+X Ctrl+E   → Edit command in $EDITOR
 #   Alt+.           → Insert last argument
 #   Alt+Q           → Quote line
-#   Alt+S           → Prepend sudo (toggle)
-#   Esc Esc         → Prepend sudo (from OMZ plugin)
+#   Alt+S           → Prepend sudo
 #
 # AUTOSUGGESTIONS:
 #   Ctrl+Space      → Accept suggestion
