@@ -10,16 +10,16 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 # Instalar Zinit si no existe
 if [[ ! -d "$ZINIT_HOME" ]]; then
     if command -v git &> /dev/null; then
-        echo "Instalando Zinit..."
+        echo "Downloads Zinit..."
         if mkdir -p "$(dirname $ZINIT_HOME)" && \
            git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"; then
-            echo "✓ Zinit instalado"
+            echo "✓ Zinit downloaded successfully"
         else
-            echo "✗ Error instalando Zinit" >&2
+            echo "✗ Error downloaded zinit" >&2
             return 1
         fi
     else
-        echo "✗ Se necesita git para instalar Zinit" >&2
+        echo "✗ Includes git for downloaded Zinit" >&2
         return 1
     fi
 fi
@@ -40,8 +40,16 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # Fzf-tab - Fuzzy completion for Zsh using fzf
 zinit ice wait lucid; zinit light Aloxaf/fzf-tab
 
+# Snippets
+# OMZP Git Plugin - Git utilities from Oh My Zsh
+zinit ice wait lucid; zinit snippet OMZP::git
+
+# Alias Tips - Suggests aliases for commands you type
+zinit ice wait'0' lucid
+zinit light djui/alias-tips
+
 # Completions - Extended completions for many commands
-zinit ice wait lucid blockf atpull'zinit creinstall -q .'
+zinit ice wait lucid atpull='zinit creinstall -q .'
 zinit light zsh-users/zsh-completions
 
 # Auto-suggestions - Provides suggestions as you type
@@ -51,10 +59,6 @@ zinit light zsh-users/zsh-autosuggestions
 # Fast syntax highlighting
 zinit ice wait lucid atinit'ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
 zinit light zdharma-continuum/fast-syntax-highlighting
-
-# Snippets
-zinit ice wait lucid; zinit snippet OMZP::git
-zinit ice wait lucid; zinit snippet OMZP::sudo
 
 # =============================================================================
 # Plugin Configuration
