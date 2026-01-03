@@ -24,15 +24,6 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 
-# Node
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# Local configuration overrides
-*.local
-.local/
-
 # Shell history backups
 .zsh_history.bak
 .bash_history.bak
@@ -42,3 +33,5 @@ yarn-error.log
 
 # Temporary test files
 test-tmp/
+
+.github/
