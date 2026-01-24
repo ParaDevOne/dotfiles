@@ -4,19 +4,20 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Plugin manager - Antidote
-source /usr/share/zsh-antidote/antidote.zsh
 zsh_plugins="$ZDOTDIR/.zsh_plugins.zsh"
+zsh_plugins_txt="$ZDOTDIR/.zsh_plugins.txt"
 
-# Regenera solo si es necesario
-if [[ ! -f $zsh_plugins || $ZDOTDIR/.zsh_plugins.txt -nt $zsh_plugins ]]; then
-  antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >$zsh_plugins
+# Compile plugins if the source file is newer than the compiled one
+if [[ ! -f "$zsh_plugins" || "$zsh_plugins_txt" -nt "$zsh_plugins" ]]; then
+  source /usr/share/zsh-antidote/antidote.zsh
+  antidote bundle < "$zsh_plugins_txt" > "$zsh_plugins"
+  zcompile "$zsh_plugins"
 fi
 
-# Carga el archivo compilado
-source $zsh_plugins
+# Load plugins from compiled file
+source "$zsh_plugins"
 
 # Completion system
-autoload -U colors && colors
 autoload -Uz compinit
 if [[ -n ${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}(#qNmh-24) ]]; then
   compinit -C -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
@@ -73,7 +74,7 @@ setopt HIST_VERIFY
 setopt SHARE_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_SPACE
-setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
 # Navigation
