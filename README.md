@@ -1,22 +1,61 @@
 # Linux Desktop Dotfiles
 
-Modern, modular configuration for Arch Linux desktop with optimized ZSH shell, Kitty terminal, and developer tools. **ZSH startup: ~63ms** with instant prompt.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Arch Linux](https://img.shields.io/badge/OS-Arch%20Linux-blue.svg)](https://archlinux.org)
+[![Tested on EndeavourOS](https://img.shields.io/badge/Tested%20on-EndeavourOS-green.svg)](https://endeavousos.com)
+[![ZSH](https://img.shields.io/badge/Shell-ZSH%205.9%2B-success.svg)](https://www.zsh.org)
 
-## 📋 Overview
+Modern, modular configuration for Arch Linux & Arch-based distros with optimized ZSH shell, Kitty terminal, and developer tools. **ZSH startup: ~73ms** with instant prompt.
 
-Highly optimized dotfiles featuring:
-- ⚡ **Fast startup**: ~63ms ZSH with P10K instant prompt (<10ms perceived)
-- 🎨 **Catppuccin Macchiato** theme across all tools
-- 🔧 **Modular architecture**: Easy to customize and maintain
-- 🚀 **Modern CLI tools**: eza, bat, fzf, zoxide, ripgrep
-- 🔑 **Advanced keybindings**: ~80 shortcuts without conflicts
+---
+
+## 📖 Table of Contents
+
+- [Quick Start](#-quick-start)
+- [Prerequisites](#-Prerequisites)
+- [Installation](#-installation)
+- [Managing Dotfiles](#-managing-dotfiles-with-stow)
+- [Directory Structure](#-structure)
+- [Performance](#-performance)
+- [Configuration](#-configuration)
+- [Keybindings](#-keybindings)
+- [Theming](#-theming)
+- [Troubleshooting](#-troubleshooting-index)
+- [Tools & Extensions](#-tools-reference)
+- [Contributing](#-contributing)
+
+---
+
+## 🚀 Quick Start
+
+**Minimal install** (5 minutes):
+
+```bash
+# 1. Clone
+git clone https://github.com/ParaDevOne/dotfiles ~/dotfiles
+
+# 2. Install dependencies
+sudo pacman -S stow zsh kitty eza fzf bat fd
+
+# 3. Deploy with Stow
+cd ~/dotfiles && stow -t ~ dots home
+
+# 4. Set ZSH as default shell
+chsh -s $(which zsh)
+
+# 5. Open new terminal
+zsh
+```
+
+See [Installation](#-installation) for detailed steps and troubleshooting.
 
 ---
 
 ## 🛠️ Prerequisites
 
 ### System Requirements
-- **OS**: Arch Linux (or Arch-based distros)
+
+- **OS**: Arch Linux or Arch-based distros (tested on **EndeavourOS**)
 - **Shell**: zsh 5.9+
 - **Package Manager**: pacman + AUR helper (yay/paru)
 
@@ -24,41 +63,43 @@ Highly optimized dotfiles featuring:
 
 ```bash
 # Essential
-sudo pacman -S zsh git kitty
+sudo pacman -S zsh git kitty stow
 
 # CLI Tools
-sudo pacman -S eza fzf bat fd ripgrep zoxide atuin
+sudo pacman -S eza fzf bat
 
-# Development
-sudo pacman -S hyperfine # For benchmarking
+# Optional but recommended
+sudo pacman -S lazygit fastfetch
 ```
 
 ---
 
-## 🚀 Quick Install
+## 📦 Installation
 
 ### Prerequisites
 
 1. **Install GNU Stow** (if not already installed)
-   ```bash
-   sudo pacman -S stow
-   ```
+
+```bash
+sudo pacman -S stow
+```
 
 2. **Install Antidote** (ZSH plugin manager)
-   ```bash
-   sudo pacman -S zsh-antidote
-   ```
+
+```bash
+yay -S antidote
+```
 
 ### Installation Steps
 
 #### 1. Clone Repository
 
 ```bash
-git clone https://github.com/ParaDevOne/dotfiles-plasma ~/dotfiles
+git clone https://github.com/ParaDevOne/dotfiles ~/dotfiles
 cd ~/dotfiles
 ```
 
-#### 2. Backup Existing Config (Optional)
+#### 2. Backup Existing Config (Recommended)
 
 ```bash
 # Create backup of existing configs
@@ -72,10 +113,10 @@ mkdir -p ~/.config/backup_$(date +%Y%m%d)
 
 ```bash
 # Essential tools
-sudo pacman -S zsh kitty eza fzf bat fd ripgrep zoxide atuin
+sudo pacman -S zsh kitty eza fzf bat fd
 
 # Optional but recommended
-sudo pacman -S lazygit fastfetch xclip hyperfine
+sudo pacman -S lazygit fastfetch
 
 # Set ZSH as default shell
 chsh -s $(which zsh)
@@ -97,21 +138,21 @@ stow -t ~ home
 
 ```bash
 # Test ZSH configuration loads correctly
-zsh -c "source ~/.zshrc && echo '✓ ZSH config loaded successfully'"
+zsh -c
 
 # Check if dotfiles were symlinked correctly
-ls -la ~/.zshrc
+ls -la $ZDOTDIR/.zshrc
 ls -la ~/.config/zsh
 ls -la ~/.config/kitty
 ```
 
-#### 6. Logout and Login
+#### 6. Open New Terminal
 
 ```bash
 # Option 1: Open new terminal
 zsh
 
-# Option 2: Logout/Login (required for shell change)
+# Option 2: Logout/Login (required for shell change to take effect)
 exit
 ```
 
@@ -163,6 +204,13 @@ git -C ~/dotfiles pull
 stow -t ~ dots home
 ```
 
+**Key Benefits:**
+
+- ✅ Clean separation between user and system configs
+- ✅ Easy installation/uninstallation with Stow
+- ✅ No manual symlink management
+- ✅ Supports multiple machines with different configs
+
 ---
 
 ## 📁 Structure
@@ -202,27 +250,20 @@ dotfiles/
 └── README.md
 ```
 
-### Stow Management
+### What Each Directory Contains
 
-Each subdirectory (`dots/`, `home/`) is managed independently with Stow:
+**`dots/`** — User-specific, non-system-critical configs
 
-```bash
-# Deploy user dotfiles
-stow -t ~ dots
+- ZSH configuration with modular structure
+- Terminal emulator (Kitty) configuration
+- Text editor settings (VS Code)
+- Qt6 theming
 
-# Deploy system/desktop environment config
-stow -t ~ home
+**`home/`** — System and Desktop Environment configs
 
-# Remove (unstow) dotfiles
-stow -t ~ -D dots
-stow -t ~ -D home
-```
-
-**Key Benefits:**
-- ✅ Clean separation between user and system configs
-- ✅ Easy installation/uninstallation with Stow
-- ✅ No manual symlink management
-- ✅ Supports multiple machines with different configs
+- KDE Plasma settings (Dolphin, Kate, Konsole)
+- Global shell environment variables
+- XDG user directories configuration
 
 ---
 
@@ -242,7 +283,7 @@ Time (mean ± σ):      63.5 ms ±   0.5 ms
 ### Optimization Techniques
 
 1. **P10K Instant Prompt**: Renders prompt from cache before loading config
-2. **Zinit Turbo Mode**: Defers non-critical plugins with `wait lucid`
+2. **Antidote Turbo Mode**: Defers non-critical plugins with `wait lucid`
 3. **Compinit Caching**: Only regenerates on `.zshrc` changes
 4. **Smart Plugin Loading**: Minimal plugin set, aggressive caching
 
@@ -260,132 +301,57 @@ hyperfine --warmup 3 'zsh -i -c exit'
 
 ## 🔧 Configuration
 
-### ZSH Plugins (Zinit)
-
-Installed automatically on first load:
-
-| Plugin                       | Purpose              | Load Mode             |
-| ---------------------------- | -------------------- | --------------------- |
-| **powerlevel10k**            | Prompt theme         | Sync (instant prompt) |
-| **fzf-tab**                  | Fuzzy completions    | Turbo                 |
-| **zsh-completions**          | Extended completions | Turbo                 |
-| **zsh-autosuggestions**      | Command suggestions  | Turbo                 |
-| **fast-syntax-highlighting** | Syntax colors        | Turbo (last)          |
-| **OMZ::git**                 | Git aliases          | Turbo                 |
-| **OMZ::sudo**                | Alt+S for sudo       | Turbo                 |
-
 ### Customize Plugins
 
-Edit `~/.config/zsh/zinit.zsh`:
+Edit `~/.config/zsh/.zsh_plugins.txt`:
 
 ```bash
 # Add new plugin
-zinit ice wait lucid
-zinit light owner/repo
+romkatv/powerlevel10k
+owner/your-new-plugin
+```
+
+Then reload ZSH:
+
+```bash
+exec zsh
 ```
 
 ### Aliases
 
+Comprehensive aliases are organized by category in `~/.config/zsh/aliases.zsh`:
+
 **Navigation:**
-```bash
-..     → cd ..
-...    → cd ../..
-cd     → zi (zoxide)
-```
+
+- `..` → `cd ..`
+- `...` → `cd ../..`
 
 **File Listing:**
-```bash
-ls     → eza -a --icons --group-directories-first
-ll     → eza -al --icons --git
-lt     → eza --tree --level=2
-```
+
+- `ls` → `eza -a --icons --group-directories-first`
+- `ll` → `eza -al --icons --git`
+- `lt` → `eza --tree --level=2`
 
 **Development:**
-```bash
-lg     → lazygit
-code   → code . (VSCode)
-v/vi   → $EDITOR
-```
 
-**System:**
-```bash
-update → sudo pacman -Syu
-install → sudo pacman -S
-remove  → sudo pacman -Rns
-```
+- `lg` → `lazygit`
 
-Full list: `~/.config/zsh/aliases.zsh`
-
----
-
-## ⌨️ Keybindings
-
-### ZSH Shortcuts
-
-**History:**
-- `Ctrl+R` → Atuin fuzzy search
-- `Up/Down` → Navigate history
-- `Ctrl+P/N` → Navigate history (alt)
-- `PageUp/Down` → Search history with current input
-
-**Navigation:**
-- `Ctrl+A/E` → Line start/end
-- `Ctrl+←/→` → Word navigation
-- `Alt+F/B` → Word navigation (emacs-style)
-
-**Editing:**
-- `Ctrl+W` → Delete word backward
-- `Ctrl+K` → Kill to end of line
-- `Ctrl+U` → Kill to start of line
-- `Ctrl+Z/Y` → Undo/Redo
-- `Alt+U/L/C` → Uppercase/Lowercase/Capitalize word
-
-**Utilities:**
-- `Alt+S` → Prepend/remove sudo
-- `Ctrl+L` → Clear screen
-- `Alt+.` → Insert last argument
-- `Ctrl+X Ctrl+E` → Edit command in $EDITOR
-
-Full reference: `~/.config/zsh/keybinds.zsh`
-
-### Kitty Shortcuts
-
-**Tabs:**
-- `Ctrl+Shift+T` → New tab (with CWD)
-- `Ctrl+Shift+W` → Close tab
-- `Ctrl+Shift+→/←` → Navigate tabs
-- `Ctrl+Shift+1-5` → Go to tab N
-
-**Windows:**
-- `Ctrl+Shift+Enter` → New window (with CWD)
-- `Ctrl+Shift+]/[` → Navigate windows
-- `Ctrl+Shift+R` → Resize mode
-
-**Layouts:**
-- `Ctrl+Shift+L` → Cycle layouts
-- `Ctrl+Alt+Z` → Toggle fullscreen (stack)
-
-**Hints (keyboard selection):**
-- `Ctrl+Shift+E` → Open URLs
-- `Ctrl+Shift+P>F` → Select paths
-- `Ctrl+Shift+P>L` → Select lines
-- `Ctrl+Shift+P>H` → Select git hashes
-
-Full reference: `~/.config/kitty/keybindings.conf`
-
----
+See full list in `~/.config/zsh/aliases.zsh` with inline comments explaining each section.
 
 ## 🎨 Theming
 
 ### Active Theme: Catppuccin Macchiato
 
+Color scheme applied consistently across:
+
 - **Kitty**: `~/.config/kitty/kitty.conf` (includes theme.conf)
-- **P10K**: Generated via `p10k configure`
-- **FZF**: Dracula colors in `~/.config/zsh/config.zsh`
+- **P10K Prompt**: Generated via `p10k configure`
+- **FZF**: Catpuccin-Macchiato colors in `~/.config/zsh/config.zsh`
 
 ### Change Theme
 
 **Kitty:**
+
 ```bash
 # Download new theme
 cd ~/.config/kitty
@@ -396,6 +362,7 @@ include ./mocha.conf
 ```
 
 **P10K:**
+
 ```bash
 p10k configure
 ```
@@ -434,7 +401,7 @@ hyperfine --warmup 3 'zsh -i -c exit'
 zsh -i -c 'zmodload zsh/zprof && source ~/.zshrc && zprof' | head -20
 
 # Check plugin load times
-zinit times
+antidote bundle ~/.config/zsh/.zsh_plugins.txt
 ```
 
 ---
@@ -443,82 +410,200 @@ zinit times
 
 ### Core Tools
 
-| Tool              | Purpose        | Config                        |
-| ----------------- | -------------- | ----------------------------- |
-| **zsh**           | Shell          | `~/.zshrc`, `~/.config/zsh/`  |
-| **zinit**         | Plugin manager | `~/.config/zsh/zinit.zsh`     |
-| **powerlevel10k** | Prompt         | `~/.p10k.zsh`                 |
-| **kitty**         | Terminal       | `~/.config/kitty/`            |
-| **atuin**         | History search | `~/.config/atuin/config.toml` |
+| Tool | Purpose | Config |
+| --- | --- | --- |
+| **zsh** | Shell | `~/.zshrc`, `~/.config/zsh/` |
+| **antidote** | Plugin manager | `~/.config/zsh/.zsh_plugins.txt` |
+| **powerlevel10k** | Prompt | `~/.p10k.zsh` |
+| **kitty** | Terminal | `~/.config/kitty/` |
+| **atuin** | History search | `~/.config/atuin/client.toml` |
 
 ### CLI Utilities
 
-| Tool        | Replaces | Usage                                |
-| ----------- | -------- | ------------------------------------ |
-| **eza**     | ls       | `ls`, `ll`, `lt`                     |
-| **bat**     | cat      | `cat`, `ccat`                        |
-| **fd**      | find     | `fd <pattern>`                       |
-| **ripgrep** | grep     | `rg <pattern>`                       |
-| **zoxide**  | cd       | `z <dir>`, aliased to `cd`           |
-| **fzf**     | -        | Fuzzy finder (Ctrl+T, Ctrl+R, Alt+C) |
-| **atuin**   | history  | Enhanced history (Ctrl+R)            |
+| Tool | Replaces | Usage |
+| --- | --- | --- |
+| **eza** | ls | `ls`, `ll`, `lt` |
+| **bat** | cat | `cat`, `ccat` |
+| **fd** | find | `fd <pattern>` |
+| **ripgrep** | grep | `rg <pattern>` |
+| **zoxide** | cd | `z <dir>`, aliased to `cd` |
+| **fzf** | — | Fuzzy finder (Ctrl+T, Ctrl+R, Alt+C) |
+| **atuin** | history | Enhanced history (Ctrl+R) |
+| **lazygit** | git | TUI for git operations |
+
+### VS Code Extensions
+
+Recommended extensions for development (automatically configured in `settings.json`):
+
+| Extension | Purpose |
+| --- | --- |
+| **GitHub Copilot** | AI code suggestions |
+| **Pylance** | Python language server |
+| **Prettier** | Code formatter |
+| **ESLint** | JavaScript linting |
+| **Rust Analyzer** | Rust development |
+| **Remote - SSH** | Remote development |
+| **GitLens** | Enhanced git integration |
+| **Thunder Client** | REST API client |
 
 ---
 
-## 🆘 Troubleshooting
+## 🆘 Troubleshooting Index
 
-### Common Issues
+### Quick Links to Common Issues
 
-**Plugins not loading:**
+- [Plugins not loading](#plugins-not-loading)
+- [P10K not showing](#p10k-not-showing)
+- [Slow startup](#slow-startup-after-changes)
+- [Keybinding conflicts](#keybinding-conflicts)
+- [ZSH not set as default](#zsh-not-set-as-default-shell)
+
+---
+
+### Plugins not loading
+
 ```bash
-# Reinstall Zinit
-rm -rf ~/.local/share/zinit
+# Reinstall Antidote
+rm -rf ~/.local/share/antidote
 source ~/.zshrc
+
+# Verify plugins
+antidote bundle ~/.config/zsh/.zsh_plugins.txt
 ```
 
-**P10K not showing:**
+**Issue**: Plugins still not working?
+
+1. Check for syntax errors: `zsh -n ~/.config/zsh/.zsh_plugins.txt`
+2. Verify plugin URLs in `.zsh_plugins.txt`
+3. Check GitHub connectivity: `curl -I https://github.com`
+
+---
+
+### P10K not showing
+
 ```bash
-# Reconfigure
+# Reconfigure P10K
 p10k configure
 
 # Check instant prompt cache
 ls -la ~/.cache/p10k-instant-prompt-*
+
+# Verify P10K is installed
+ls -la ~/.local/share/antidote/powerlevel10k
 ```
 
-**Slow startup after adding plugins:**
-```bash
-# Profile
-zsh -i -c 'zmodload zsh/zprof && source ~/.zshrc && zprof'
+**Issue**: Prompt still broken?
 
-# Check compinit dump
-ls -la ~/.config/zsh/.zcompdump
+1. Delete and recreate the cache
+2. Run `p10k configure` again
+3. Verify terminal supports Unicode fonts
+
+---
+
+### Slow startup after changes
+
+```bash
+# Profile to identify slow plugins
+zsh -i -c 'zmodload zsh/zprof && source ~/.zshrc && zprof' | head -30
+
+# Check compinit dump age
+ls -la ~/.config/zsh/.zcompdump*
+
+# Regenerate completion cache
+rm ~/.config/zsh/.zcompdump*
+zsh
 ```
 
-**Keybinding conflicts:**
+**Quick fixes**:
+
+1. Remove unnecessary plugins from `.zsh_plugins.txt`
+2. Use `wait` and `lucid` in plugin specifications
+3. Verify disk I/O is not the bottleneck
+
+---
+
+### Keybinding conflicts
+
 ```bash
-# List all bindings
+# List all current bindings
 bindkey
 
 # Test specific binding
-bindkey '^R'  # Should show: atuin
+bindkey '^R'  # Should show atuin
+
+# Check for duplicate bindings
+bindkey | grep -c 'Ctrl-'
 ```
 
-### Reset to Defaults
+**Issue**: Custom keybinding not working?
+
+1. Verify syntax in `keybinds.zsh`
+2. Check for conflicts with other plugins
+3. Test with `bindkey <key>` to see what's mapped
+
+---
+
+### ZSH not set as default shell
 
 ```bash
-# Remove all configs
-rm -rf ~/.zshrc ~/.zprofile ~/.config/zsh ~/.config/kitty ~/.config/atuin ~/.p10k.zsh
+# Check current shell
+echo $SHELL
 
-# Reinstall
-cd ~/.dotfiles
-./install.sh  # (if you create an install script)
+# List available shells
+cat /etc/shells
+
+# Change default shell
+chsh -s /usr/bin/zsh
+
+# Verify change (requires logout/login)
+echo $SHELL
 ```
 
 ---
 
-## 📚 Documentation
+### Stow conflict errors
 
-- **Zinit**: https://github.com/zdharma-continuum/zinit
+```bash
+# Check for existing files/symlinks
+stow --simulate -t ~ dots
+
+# Force adopt conflicting files
+stow --adopt -t ~ dots
+
+# If conflicts persist, manually move
+mkdir -p ~/.config/backup
+mv ~/.zshrc ~/.config/backup/
+stow -t ~ dots
+```
+
+---
+
+### Reset to Defaults
+
+```bash
+# Remove all dotfiles
+stow -t ~ -D dots home
+
+# Remove ZSH configs
+rm -rf ~/.zshrc ~/.zprofile ~/.config/zsh ~/.config/kitty ~/.config/atuin ~/.p10k.zsh
+
+# Unset ZSH as default
+chsh -s /bin/bash
+
+# Reinstall from scratch
+cd ~/dotfiles
+stow -t ~ dots home
+chsh -s $(which zsh)
+zsh
+```
+
+---
+
+## 📚 Additional Resources
+
+Official documentation:
+
+- **Antidote**: https://getantidote.github.io/
 - **Powerlevel10k**: https://github.com/romkatv/powerlevel10k
 - **Kitty**: https://sw.kovidgoyal.net/kitty/
 - **Atuin**: https://atuin.sh/
@@ -529,12 +614,17 @@ cd ~/.dotfiles
 
 ## 🤝 Contributing
 
-Found a bug or have a suggestion? Open an issue or PR!
+Found a bug, have a suggestion, or want to improve something? Contributions are welcome!
 
-**Before submitting:**
-1. Test on fresh Arch Linux install
-2. Benchmark startup time: `hyperfine 'zsh -i -c exit'`
-3. Check for conflicts: Run all keybindings
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Quick Contribution Steps
+
+1. Fork the repository
+2. Test on fresh Arch Linux/EndeavourOS install
+3. Benchmark startup time: `hyperfine 'zsh -i -c exit'`
+4. Check for keybinding conflicts: Test all bindings
+5. Submit a PR with clear description of changes
 
 ---
 
@@ -542,9 +632,11 @@ Found a bug or have a suggestion? Open an issue or PR!
 
 MIT License - Feel free to use and modify.
 
+See [LICENSE](LICENSE) for full terms.
+
 ---
 
 **Maintained by**: [@ParaDevOne](https://github.com/ParaDevOne)
-**Last Updated**: 2025-12-19
+**Last Updated**: 2025-01-24
 **ZSH Startup**: ~63ms (real), <10ms (perceived with P10K)
-**Tested on**: EndeavourOS (Arch-based)
+**Tested on**: Arch Linux, EndeavourOS
