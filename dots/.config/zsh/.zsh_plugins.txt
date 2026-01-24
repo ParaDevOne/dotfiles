@@ -1,8 +1,8 @@
 romkatv/powerlevel10k
-zdharma-continuum/fast-syntax-highlighting
-zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
-Aloxaf/fzf-tab
 getantidote/use-omz
 ohmyzsh/ohmyzsh path:plugins/git
+Aloxaf/fzf-tab
+zsh-users/zsh-autosuggestions
+zdharma-continuum/fast-syntax-highlighting
 djui/alias-tips
