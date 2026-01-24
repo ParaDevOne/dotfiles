@@ -7,7 +7,6 @@
   "window.title": "${rootName}${profileName}${separator}${appName}",
   "window.titleBarStyle": "custom",
   "window.controlsStyle": "custom",
-  "window.zoomLevel": 1,
   "window.zoomPerWindow": true,
   "window.newWindowDimensions": "inherit",
   "window.autoDetectColorScheme": false,
@@ -16,13 +15,11 @@
   "workbench.iconTheme": "symbols",
   "workbench.activityBar.location": "top",
   "workbench.sideBar.location": "right",
-  "workbench.statusBar.visible": false,
   "workbench.navigationControl.enabled": false,
   "workbench.startupEditor": "none",
   "workbench.tips.enabled": false,
   "workbench.editor.showTabs": "multiple",
   "workbench.editor.wrapTabs": true,
-  "workbench.editor.enablePreview": true,
   "workbench.editor.empty.hint": "hidden",
   "workbench.editor.decorations.badges": true,
   "workbench.editor.decorations.colors": true,
@@ -202,5 +199,9 @@
   "extensions.ignoreRecommendations": true,
   "extensions.autoCheckUpdates": true,
   "extensions.closeExtensionDetailsOnViewChange": true,
-  "symbols.hidesExplorerArrows": true
+  "symbols.hidesExplorerArrows": true,
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.class": "default"
+  }
 }

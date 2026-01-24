@@ -37,84 +37,192 @@ sudo pacman -S hyperfine # For benchmarking
 
 ## 🚀 Quick Install
 
-### 1. Clone Repository
+### Prerequisites
+
+1. **Install GNU Stow** (if not already installed)
+   ```bash
+   sudo pacman -S stow
+   ```
+
+2. **Install Antidote** (ZSH plugin manager)
+   ```bash
+   sudo pacman -S zsh-antidote
+   ```
+
+### Installation Steps
+
+#### 1. Clone Repository
 
 ```bash
-git clone https://github.com/ParaDevOne/dotfiles-plasma ~/.dotfiles
-cd ~/.dotfiles
+git clone https://github.com/ParaDevOne/dotfiles-plasma ~/dotfiles
+cd ~/dotfiles
 ```
 
-### 2. Backup Existing Config
+#### 2. Backup Existing Config (Optional)
 
 ```bash
-# Create backup
+# Create backup of existing configs
 mkdir -p ~/.config/backup_$(date +%Y%m%d)
 [[ -f ~/.zshrc ]] && cp ~/.zshrc ~/.config/backup_$(date +%Y%m%d)/
 [[ -d ~/.config/zsh ]] && cp -r ~/.config/zsh ~/.config/backup_$(date +%Y%m%d)/
 [[ -d ~/.config/kitty ]] && cp -r ~/.config/kitty ~/.config/backup_$(date +%Y%m%d)/
 ```
 
-### 3. Install Dependencies
+#### 3. Install Dependencies
 
 ```bash
-# Core tools
-sudo pacman -S zsh kitty eza fzf bat fd ripgrep zoxide atuin hyperfine
+# Essential tools
+sudo pacman -S zsh kitty eza fzf bat fd ripgrep zoxide atuin
 
 # Optional but recommended
-sudo pacman -S lazygit fastfetch xclip
+sudo pacman -S lazygit fastfetch xclip hyperfine
 
 # Set ZSH as default shell
 chsh -s $(which zsh)
 ```
 
-### 4. Deploy Dotfiles
+#### 4. Deploy Dotfiles with Stow
 
 ```bash
-# Link configs
-ln -sf ~/.dotfiles/.zshrc ~/.zshrc
-ln -sf ~/.dotfiles/.zprofile ~/.zprofile
-ln -sf ~/.dotfiles/.config/zsh ~/.config/
-ln -sf ~/.dotfiles/.config/kitty ~/.config/
-ln -sf ~/.dotfiles/.config/atuin ~/.config/
-ln -sf ~/.dotfiles/.config/fastfetch ~/.config/
+cd ~/dotfiles
+
+# Deploy user dotfiles (ZSH, Kitty, VSCode, etc.)
+stow -t ~ dots
+
+# Deploy system/desktop environment configs (KDE Plasma)
+stow -t ~ home
 ```
 
-### 5. Initialize
+#### 5. Verify Installation
 
 ```bash
-# Logout and login (for shell change)
-# Or open new terminal
+# Test ZSH configuration loads correctly
+zsh -c "source ~/.zshrc && echo '✓ ZSH config loaded successfully'"
+
+# Check if dotfiles were symlinked correctly
+ls -la ~/.zshrc
+ls -la ~/.config/zsh
+ls -la ~/.config/kitty
+```
+
+#### 6. Logout and Login
+
+```bash
+# Option 1: Open new terminal
 zsh
 
-# Zinit will auto-install on first load
-# P10K configuration wizard will run automatically
-p10k configure
+# Option 2: Logout/Login (required for shell change)
+exit
+```
+
+---
+
+## 🔄 Managing Dotfiles with Stow
+
+### Deploy/Install Dotfiles
+
+```bash
+# Deploy user configs only
+stow -t ~ dots
+
+# Deploy system/DE configs only
+stow -t ~ home
+
+# Deploy both
+stow -t ~ dots home
+```
+
+### Remove/Uninstall Dotfiles
+
+```bash
+# Remove user configs
+stow -t ~ -D dots
+
+# Remove system/DE configs
+stow -t ~ -D home
+
+# Remove both
+stow -t ~ -D dots home
+```
+
+### Verify Symlinks
+
+```bash
+# List all created symlinks
+ls -la ~/ | grep '^l'
+ls -la ~/.config/ | grep '^l'
+```
+
+### Update Existing Installation
+
+```bash
+# Pull latest changes
+git -C ~/dotfiles pull
+
+# Re-apply stow (safe if no conflicts)
+stow -t ~ dots home
 ```
 
 ---
 
 ## 📁 Structure
 
+This repository uses **GNU Stow** to manage dotfiles across two main categories:
+
 ```
-~/.dotfiles/
-├── .zshrc                          # Entry point + P10K instant prompt
-├── .zprofile                       # Login shell (Wayland, XDG, PATH)
-├── .config/
-│   ├── zsh/
-│   │   ├── config.zsh             # Options, history, completions, FZF
-│   │   ├── zinit.zsh              # Plugin manager + plugins
-│   │   ├── aliases.zsh            # Command aliases (~50)
-│   │   └── keybinds.zsh           # ZSH keybindings (~38)
-│   ├── kitty/
-│   │   ├── kitty.conf             # Main config + theme
-│   │   ├── kittysession.conf      # Startup tabs
-│   │   └── keybindings.conf       # Terminal shortcuts (~80)
-│   ├── atuin/
-│   │   └── config.toml            # Enhanced history search
-│   └── fastfetch/
-│       └── config.jsonc           # System info display
+dotfiles/
+├── dots/                           # User-specific dotfiles (non-system)
+│   └── .config/
+│       ├── zsh/                    # ZSH configuration (modular)
+│       │   ├── .zshrc             # Entry point + P10K instant prompt
+│       │   ├── .zprofile          # Login environment
+│       │   ├── .zsh_plugins.txt   # Antidote plugin list
+│       │   ├── aliases.zsh        # Command aliases (~50)
+│       │   ├── functions.zsh      # Shell functions
+│       │   └── keybinds.zsh       # ZSH keybindings (~38)
+│       ├── kitty/                  # Terminal emulator
+│       │   ├── kitty.conf         # Main config (includes theme/keybindings)
+│       │   ├── theme.conf         # Catppuccin Macchiato theme
+│       │   └── keybindings.conf   # Terminal shortcuts (~25)
+│       ├── Code/User/              # VS Code settings
+│       │   └── settings.json      # Editor configuration
+│       └── qt6ct/
+│           └── qt6ct.conf         # Qt6 theming
+│
+├── home/                           # System/Desktop Environment config (KDE Plasma)
+│   ├── .config/
+│   │   ├── dolphinrc              # File manager settings
+│   │   ├── katerc                 # Kate text editor
+│   │   ├── konsolerc              # Konsole terminal emulator
+│   │   ├── kwriterc               # KWrite text editor
+│   │   └── user-dirs.dirs         # XDG user directories
+│   └── .zshenv                    # Global shell environment (SHARED)
+│
+├── LICENSE
 └── README.md
 ```
+
+### Stow Management
+
+Each subdirectory (`dots/`, `home/`) is managed independently with Stow:
+
+```bash
+# Deploy user dotfiles
+stow -t ~ dots
+
+# Deploy system/desktop environment config
+stow -t ~ home
+
+# Remove (unstow) dotfiles
+stow -t ~ -D dots
+stow -t ~ -D home
+```
+
+**Key Benefits:**
+- ✅ Clean separation between user and system configs
+- ✅ Easy installation/uninstallation with Stow
+- ✅ No manual symlink management
+- ✅ Supports multiple machines with different configs
 
 ---
 

@@ -1,0 +1,22 @@
+MenuBar=Disabled
+
+[Desktop Entry]
+DefaultProfile=Default.profile
+
+[FileLocation]
+scrollbackUseCacheLocation=true
+scrollbackUseSystemLocation=false
+
+[General]
+ConfigVersion=1
+
+[KonsoleWindow]
+AllowMenuAccelerators=true
+ShowWindowTitleOnTitleBar=true
+
+[MemorySettings]
+EnableMemoryMonitoring=true
+MemoryLimitValue=4678
+
+[UiSettings]
+ColorScheme=
