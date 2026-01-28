@@ -1,0 +1,8 @@
+# Cargar configuraciones modulares
+include $HOME/.config/sway/config.d/default
+include $HOME/.config/sway/config.d/input
+include $HOME/.config/sway/config.d/output
+include $HOME/.config/sway/config.d/theme
+include $HOME/.config/sway/config.d/application_defaults
+include $HOME/.config/sway/config.d/autostart_applications
+include /etc/sway/config.d/*

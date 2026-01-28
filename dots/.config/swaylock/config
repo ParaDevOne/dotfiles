@@ -1,0 +1,28 @@
+color=1e1e2e
+show-failed-attempts
+indicator-radius=100
+indicator-thickness=10
+
+# COLORES QUE IMPORTAN (feedback visual)
+ring-color=313244
+inside-color=1e1e2e
+
+# Cuando ESCRIBES (typing)
+ring-ver-color=89b4fa
+inside-ver-color=89b4fa33
+
+# Cuando das ENTER (verificando)
+text-ver-color=cdd6f4
+
+# Cuando fallas
+ring-wrong-color=f38ba8
+inside-wrong-color=f38ba833
+text-wrong-color=f38ba8
+
+# Teclas normales
+key-hl-color=a6e3a1
+bs-hl-color=f38ba8
+
+# Texto
+text-color=cdd6f4
+text-caps-lock-color=f9e2af

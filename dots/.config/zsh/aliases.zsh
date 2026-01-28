@@ -63,3 +63,6 @@ alias lg='lazygit'
 alias fv='v $(fzf --preview "bat --color=always --style=numbers --line-range=:500 {}")'
 alias fkill='ps -ef | fzf --header="Select process to kill" | awk "{print \$2}" | xargs -r kill -15'
 alias fh='history | fzf +s --tac | sed "s/ *[0-9]* *//" | wl-copy'
+
+# Imgs
+alias img='kitty +kitten icat'

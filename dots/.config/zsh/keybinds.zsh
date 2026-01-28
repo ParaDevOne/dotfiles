@@ -9,12 +9,6 @@ bindkey '^[[B' down-line-or-history
 bindkey '^?' backward-delete-char
 bindkey '^[[3~' delete-char
 
-bindkey '^[[C' forward-word                    # Right arrow
-bindkey '^[^[[C' forward-word                  # Alt+Right (avanza 1 palabra)
-bindkey '^ ' autosuggest-accept                # Ctrl+Space (acepta toda la sugerencia)
-bindkey '^[[F' autosuggest-accept              # End (acepta toda la sugerencia)
-bindkey '^[[C' autosuggest-accept
-
 # Smart sudo toggle (Alt+S)
 __sudo-replace-buffer() {
   local old=$1 new=$2 space=${2:+ }

@@ -1,0 +1,34 @@
+### Estética (Gaps & Borders)
+bindsym $mod+Shift+g exec swaymsg "gaps inner all set 0; gaps outer all set 0"
+bindsym $mod+Ctrl+g exec swaymsg "gaps inner all set 5; gaps outer all set 3"
+
+# Hide titlebar on windows:
+default_border pixel 1
+default_floating_border pixel 2
+
+# Default Font
+font pango:Inter Regular 10
+
+# Thin borders:
+smart_borders on
+
+# Title format for windows
+for_window [shell="xdg_shell"] title_format "%title (%app_id)"
+for_window [shell="x_wayland"] title_format "%class - %title"
+
+# Catppuccin Machiato Color Scheme
+# class                 border  bground text    indicator child_border
+client.focused          #8aadf4 #363a4f #cad1f5 #8aadf4   #8aadf4
+client.focused_inactive #5b6078 #24273a #cad1f5 #5b6078   #5b6078
+client.unfocused        #5b6078 #24273a #a6adc8 #5b6078   #5b6078
+client.urgent           #ed8796 #24273a #cad1f5 #ed8796   #ed8796
+client.placeholder      #24273a #24273a #cad1f5 #24273a   #24273a
+client.background       #1e1e2e
+
+# Extras
+focus_follows_mouse yes
+mouse_warping container
+
+bar {
+    swaybar_command waybar
+}

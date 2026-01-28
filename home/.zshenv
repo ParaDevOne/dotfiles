@@ -58,13 +58,15 @@ export PATH
 # ZSH startup optimization
 skip_global_compinit=1
 
+export WLR_NO_HARDWARE_CURSORS=1
+
 # Font rendering
 export FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
 
 # Video acceleration
-export LIBVA_DRIVER_NAME=nvidia
-export VDPAU_DRIVER=nvidia
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
+#export LIBVA_DRIVER_NAME=nvidia
+#export VDPAU_DRIVER=nvidia
+#export __GLX_VENDOR_LIBRARY_NAME=nvidia
 
 # Wayland configuration (if using Wayland)
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then

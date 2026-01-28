@@ -16,6 +16,7 @@ Modern, modular configuration for Arch Linux & Arch-based distros with optimized
 - [Installation](#-installation)
 - [Managing Dotfiles](#-managing-dotfiles-with-stow)
 - [Directory Structure](#-structure)
+- [Sway Configuration](#-sway-configuration-packages)
 - [Performance](#-performance)
 - [Configuration](#-configuration)
 - [Keybindings](#-keybindings)
@@ -296,6 +297,82 @@ zsh -i -c 'zmodload zsh/zprof && source ~/.zshrc && zprof' | head -20
 # Benchmark
 hyperfine --warmup 3 'zsh -i -c exit'
 ```
+
+---
+
+## 🪟 Sway Configuration Packages
+
+The Sway configuration (`~/.config/sway/`) requires the following packages to function properly. The configuration includes dependency checks for each component.
+
+### Core Package Requirements
+
+**Window Manager & Display (Required)**
+- `sway` — Wayland compositor and window manager
+- `swaybg` — Wallpaper management for Sway
+- `swayidle` — Idle/sleep management
+- `swaylock` — Screen lock utility
+
+**Shells & Terminals**
+- `kitty` — GPU-based terminal emulator (configured as default terminal)
+
+**Application Launcher & Menus**
+- `wofi` — Application launcher with .desktop integration
+
+**Browsers & File Management**
+- `brave` — Default web browser
+- `firefox` — Alternative web browser
+- `nemo` — File manager (floating window)
+
+**Audio & Multimedia**
+- `pipewire` or `pulseaudio` — Audio server (for `pactl` volume control)
+- `pavucontrol` — PulseAudio volume control GUI
+- `blueman` — Bluetooth manager (graphical)
+
+**Notifications & System**
+- `mako` — Desktop notification daemon
+- `libnotify` — Notification library (`notify-send`)
+- `polkit-gnome` — Authentication agent for elevated privileges
+- `dbus` — Inter-process communication system
+
+**Clipboard & History**
+- `wl-clipboard` — Wayland clipboard management (`wl-paste`, `wl-copy`)
+- `cliphist` — Clipboard history manager (text & images)
+
+**Display & Color Management**
+- `brightnessctl` — Backlight brightness control
+- `gammastep` — Color temperature management (Wayland alternative to f.lux)
+
+**Screenshots & Capture**
+- `grimshot` — Screenshot utility for Wayland
+
+**Automatic Tiling**
+- `autotiling` — Dynamic window tiling mode switcher
+
+**Network & Connectivity**
+- `networkmanager` — Network connection manager
+- `nm-applet` — NetworkManager system tray applet
+
+**UI & Theming**
+- `waybar` — Wayland status bar
+- `inter` — Font family (configured as default)
+
+### Quick Install
+
+Install all required packages:
+
+```bash
+sudo pacman -S sway swaybg swayidle swaylock kitty wofi brave firefox \
+  pipewire pavucontrol blueman mako libnotify polkit-gnome dbus \
+  wl-clipboard cliphist brightnessctl gammastep grimshot autotiling \
+  networkmanager nm-applet waybar inter
+
+# On Arch-based distros, some may need AUR:
+yay -S autotiling cliphist gammastep
+```
+
+### Theme
+
+Sway uses **Catppuccin Machiato** color scheme. Configuration path: `~/.config/sway/config.d/theme`
 
 ---
 
