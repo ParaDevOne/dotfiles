@@ -1,0 +1,36 @@
+# Auth with polkit-gnome:
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Import environment variables for user systemd service manager
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# Update dbus environments with display variables
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# Idle configuration
+exec swayidle idlehint 1
+
+# Desktop notifications
+exec which mako >/dev/null && mako
+
+# Clipboard history (text and images)
+exec which cliphist >/dev/null && wl-paste --type text --watch cliphist store
+exec which cliphist >/dev/null && wl-paste --type image --watch cliphist store
+
+# Network Applet
+exec which nm-applet >/dev/null && nm-applet --indicator
+
+# Color temperature management
+exec which gammastep >/dev/null && gammastep -O 5700 -t 5700:3600 -g 0.8 -m wayland &
+
+# Idle and lock management
+exec swayidle -w \
+    timeout 300 'swaylock' \
+    timeout 600 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock'
+
+# Always-running services
+exec_always which autotiling >/dev/null && autotiling
+exec_always swaybg -i ~/dotfiles/wallpapers/wallpaper.png -m fill
