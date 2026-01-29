@@ -1,12 +1,12 @@
-# Auth with polkit-gnome:
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
 # Import environment variables for user systemd service manager
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # Update dbus environments with display variables
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# Auth with polkit-gnome:
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Idle configuration
 exec swayidle idlehint 1

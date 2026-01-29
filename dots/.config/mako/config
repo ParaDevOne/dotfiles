@@ -1,4 +1,3 @@
-# Mako notification daemon configuration
 background-color=#1e1e2e
 text-color=#cdd6f4
 border-color=#b4befe
@@ -7,26 +6,3 @@ border-radius=10
 default-timeout=5000
 ignore-timeout=1
 max-visible=3
-
-# Layout and positioning
-anchor=top-right
-margin=10
-padding=15
-font=Inter Regular 10
-icons=yes
-max-icon-size=32
-sort=-time
-
-# Critical notifications (red, no timeout)
-[urgency=critical]
-background-color=#f38ba8
-text-color=#1e1e2e
-border-color=#f38ba8
-timeout=0
-
-# Low urgency notifications (dimmed)
-[urgency=low]
-background-color=#313244
-text-color=#a6adc8
-border-color=#45475a
-timeout=2000
