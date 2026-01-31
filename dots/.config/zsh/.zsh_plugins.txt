@@ -1,8 +1,7 @@
-romkatv/powerlevel10k
+sindresorhus/pure
 zsh-users/zsh-completions
-getantidote/use-omz
-ohmyzsh/ohmyzsh path:plugins/git
 Aloxaf/fzf-tab
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
+romkatv/zsh-defer
 djui/alias-tips
