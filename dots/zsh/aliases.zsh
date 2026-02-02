@@ -1,7 +1,6 @@
 # Navigation & Listing (eza - modern ls replacement)
 alias ls='eza -a --icons=always --group-directories-first'
 alias ll='eza -al --icons=always --group-directories-first --git'
-alias la='eza -a --icons=always --group-directories-first'
 alias lt='eza -a --tree --level=2 --icons=always --group-directories-first'
 alias l='eza -1 --icons=always --group-directories-first'
 alias lnew='eza -al --sort=modified --icons=always'
@@ -11,16 +10,14 @@ alias treea='eza -al --tree --icons --git-ignore'
 alias lsd='eza -d */ --icons=always'
 
 # ZSH Configuration
-alias zshconf='cd ~/.config/zsh && ls'
-alias reload='source $ZDOTDIR/.zshrc && echo "✓ ZSH config reloaded"'
-alias zshconfig='$EDITOR $ZDOTDIR/.zshrc'
+alias reload='exec zsh'
+alias zcg='$EDITOR $ZDOTDIR/.zshrc'
 alias aliasconfig='$EDITOR $ZDOTDIR/aliases.zsh'
 alias zshplugins='$EDITOR $ZDOTDIR/.zsh_plugins.txt'
 alias v='$EDITOR'
 
 # System & File Operations
 alias cl='clear'
-alias c='clear'
 alias q='exit'
 alias ff='fastfetch'
 alias shutdown='systemctl poweroff'

@@ -1,0 +1,23 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+      force: false
+      relative: true
+
+- clean: ['~']
+
+- link:
+    # Home
+    ~/.zshenv: home/.zshenv
+
+    # Dots (fíjate que las rutas de origen coincidan con tu 'ls')
+    ~/.config/Code/User: dots/Code/User
+    ~/.config/environment.d: dots/environment.d
+    ~/.config/kitty: dots/kitty
+    ~/.config/zsh: dots/zsh
+
+    # Sway
+    ~/.config/mako: sway/mako
+    ~/.config/sway: sway/sway
+    ~/.config/swaylock: sway/swaylock

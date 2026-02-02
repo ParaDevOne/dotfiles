@@ -1,9 +1,8 @@
 #!/usr/bin/env zsh
 
 if [ -x /usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator ]; then
-    # 'set -a' hace que todas las variables definidas a continuación se exporten automáticamente
     set -a
-    eval $(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
+    eval $(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator 2>/dev/null)
     set +a
 fi
 
@@ -27,6 +26,7 @@ path=(
     "/usr/lib/ccache/bin"
     $path
 )
+path=($^path(N/))
 export PATH
 
 # ZSH startup optimization

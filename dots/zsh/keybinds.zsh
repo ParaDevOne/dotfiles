@@ -1,13 +1,14 @@
-# Set Emacs mode
-bindkey -e
-
-# Arrow keys for history navigation
+# Arrow keys (fallback mientras aprendes hjkl)
 bindkey '^[[A' up-line-or-history
 bindkey '^[[B' down-line-or-history
 
 # Delete/Backspace
 bindkey '^?' backward-delete-char
 bindkey '^[[3~' delete-char
+
+# Home/End keys
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
 
 # Smart sudo toggle (Alt+S)
 __sudo-replace-buffer() {

@@ -1,6 +1,6 @@
 ### Estética (Gaps & Borders)
-bindsym $mod+Shift+g exec swaymsg "gaps inner all set 0; gaps outer all set 0"
-bindsym $mod+Ctrl+g exec swaymsg "gaps inner all set 5; gaps outer all set 3"
+gaps inner 4px
+gaps outer 4px
 
 # Hide titlebar on windows:
 default_border pixel 1

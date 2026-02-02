@@ -26,11 +26,12 @@ exec which gammastep >/dev/null && gammastep -O 5700 -t 5700:3600 -g 0.8 -m wayl
 
 # Idle and lock management
 exec swayidle -w \
-    timeout 300 'swaylock' \
-    timeout 600 'swaymsg "output * power off"' \
-    resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylock'
+    timeout 270 'brightnessctl -s set 10%' resume 'brightnessctl -r' \
+    timeout 300 'swaylock -f' \
+    timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    timeout 900 'systemctl suspend' \
+    before-sleep 'swaylock -f'
 
 # Always-running services
 exec_always which autotiling >/dev/null && autotiling
-exec_always swaybg -i ~/dotfiles/wallpapers/wallpaper.png -m fill
+exec_always swaybg -i ~/dotfiles/wallpapers/wallpapers_2.jpg -m fill

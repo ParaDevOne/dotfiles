@@ -1,0 +1,12 @@
+# Cache y binarios de Zsh
+*.zwc
+.zsh_plugins.zsh
+zcompdump*
+.zcompcache/
+
+# Datos dinámicos
+*history*
+*.log
+
+# Carpetas de Dotbot
+dotbot/
