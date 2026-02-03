@@ -1,8 +1,7 @@
-sindresorhus/pure
-zsh-users/zsh-completions
-Aloxaf/fzf-tab
-zsh-users/zsh-autosuggestions
-zdharma-continuum/fast-syntax-highlighting
 romkatv/zsh-defer
+zsh-users/zsh-completions
+sindresorhus/pure
+Aloxaf/fzf-tab
+zdharma-continuum/fast-syntax-highlighting
 djui/alias-tips
-jeffreytse/zsh-vi-mode
+zsh-users/zsh-autosuggestions

@@ -1,46 +1,14 @@
 # Modules loading for zsh features
 zmodload zsh/complist
-zmodload zsh/zle
 zmodload zsh/parameter
 zmodload zsh/datetime
 
 # Ensure necessary directories exist
-[[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
-[[ -d ~/.local/share/zsh ]] || mkdir -p ~/.local/share/zsh
-
 export ZSH_CACHE="${XDG_CACHE_HOME}/zsh"
 export ZSH_DATA="${XDG_DATA_HOME}/zsh"
 
-# VI mode settings
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-
-# Cursores visuales para cada modo
-ZVM_CURSOR_STYLE_ENABLED=true
-ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM   # Barra parpadeante en INSERT
-ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK           # Bloque en NORMAL
-ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE       # Subrayado en OPPEND
-
-ZVM_KEYTIMEOUT=0.01
-
-# Plugin manager - Antidote & Prompt
-zsh_plugins="$ZSH_CACHE/.zsh_plugins.zsh"
-
-if [[ ! -f "$zsh_plugins" || "$ZDOTDIR/.zsh_plugins.txt" -nt "$zsh_plugins" ]]; then
-  source /usr/share/zsh-antidote/antidote.zsh
-  antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >"$zsh_plugins"
-  zcompile "$zsh_plugins"
-fi
-source "$zsh_plugins"
-unset zsh_plugins
-
-# Pure prompt settings & initialization
-export PURE_GIT_PULL=1
-export PURE_CMD_MAX_EXEC_TIME=2
-export PURE_GIT_DELAY_PRECOMMAND_DISPLAY=3
-
-autoload -Uz promptinit
-promptinit
-prompt pure
+[[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
+[[ -d ~/.local/share/zsh ]] || mkdir -p ~/.local/share/zsh
 
 # Completion system
 _zdump="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
@@ -53,14 +21,52 @@ else
 fi
 unset _zdump
 
+# Plugin manager - Antidote & Prompt
+zsh_plugins="$ZSH_CACHE/.zsh_plugins.zsh"
+
+if [[ ! -f "$zsh_plugins" || "$ZDOTDIR/.zsh_plugins.txt" -nt "$zsh_plugins" ]]; then
+  source /usr/share/zsh-antidote/antidote.zsh
+  antidote bundle <"$ZDOTDIR/.zsh_plugins.txt" >"$zsh_plugins"
+  zcompile "$zsh_plugins"
+fi
+source "$zsh_plugins"
+unset zsh_plugins
+
+# Pure prompt configuration & initialization
+export PURE_GIT_PULL=1
+export PURE_CMD_MAX_EXEC_TIME=2
+export PURE_GIT_DELAY_PRECOMMAND_DISPLAY=3
+
+zstyle :prompt:pure:git:pre_prompt_delay 0.1
+zstyle :prompt:pure:git:stash show yes
+zstyle :prompt:pure:git:dirty check_untracked yes
+zstyle :prompt:pure:execution_time threshold 2
+
+autoload -Uz prompt_pure_setup
+prompt_pure_setup
+zstyle :prompt:pure:prompt:success color "#C6A0F6"
+zstyle :prompt:pure:prompt:error color "#ED8796"
+zstyle :prompt:pure:path color "#8AADF4"
+zstyle :prompt:pure:git:branch color "#91D7E3"
+zstyle :prompt:pure:git:dirty color "#EED49F"
+zstyle :prompt:pure:git:arrow color "#A6DA95"
+zstyle :prompt:pure:virtualenv color "#F5BDE6"
+zstyle :prompt:pure:user color "#B8C0E0"
+zstyle :prompt:pure:host color "#B8C0E0"
+zstyle :prompt:pure:execution_time color "#F5A97F"
+
 # Compile configuration files if they are newer than their compiled versions
 for conf_file in "$ZDOTDIR"/*.zsh; do
     local cache_file="$ZSH_CACHE/zwc/${conf_file:t}.zwc"
 
     if [[ ! -f "$cache_file" || "$conf_file" -nt "$cache_file" ]]; then
-        zcompile "$conf_file" -o "$cache_file"
+        # Ensure the directory exists first
+        mkdir -p "${cache_file:h}"
+        # Correct syntax: target first, then source
+        zcompile "$cache_file" "$conf_file"
     fi
 done
+
 # History & Setopt
 HISTFILE="$ZSH_DATA/history"
 HISTSIZE=50000
@@ -85,28 +91,11 @@ unalias run-help 2>/dev/null
 autoload -Uz run-help
 bindkey '^[h' run-help
 
-# Pure prompt configuration
-zstyle :prompt:pure:git:pre_prompt_delay 0.1
-zstyle :prompt:pure:git:stash show yes
-zstyle :prompt:pure:git:dirty check_untracked yes
-zstyle :prompt:pure:execution_time threshold 2
-
-zstyle :prompt:pure:prompt:success color "#C6A0F6"
-zstyle :prompt:pure:prompt:error color "#ED8796"
-zstyle :prompt:pure:path color "#8AADF4"
-zstyle :prompt:pure:git:branch color "#91D7E3"
-zstyle :prompt:pure:git:dirty color "#EED49F"
-zstyle :prompt:pure:git:arrow color "#A6DA95"
-zstyle :prompt:pure:virtualenv color "#F5BDE6"
-zstyle :prompt:pure:user color "#B8C0E0"
-zstyle :prompt:pure:host color "#B8C0E0"
-zstyle :prompt:pure:execution_time color "#F5A97F"
-
 # Completion styles & performance
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zcompcache"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 zstyle ':completion:*' completer _complete _approximate
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*' file-patterns '*(-/):directories' '*:all-files'

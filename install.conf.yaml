@@ -12,7 +12,10 @@
     ~/.zshenv: home/.zshenv
 
     # Dots (fíjate que las rutas de origen coincidan con tu 'ls')
-    ~/.config/Code/User: dots/Code/User
+    ~/.config/Code/User/settings.json:
+      path: dots/code/settings.json
+      create: true
+      force: true
     ~/.config/environment.d: dots/environment.d
     ~/.config/kitty: dots/kitty
     ~/.config/zsh: dots/zsh
