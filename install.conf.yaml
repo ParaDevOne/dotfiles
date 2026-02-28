@@ -1,0 +1,30 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+      force: false
+      relative: true
+
+- clean: ['~']
+
+- link:
+    # Home
+    ~/.zshenv: home/.zshenv
+
+    # Dots
+    ~/.config/Code/User/settings.json:
+      path: dots/code/settings.json
+    ~/.config/kitty: dots/kitty
+    ~/.config/zsh: dots/zsh
+    ~/.config/fastfetch: dots/fastfetch
+
+    # Hyprland
+    ~/.config/hypr: hyprland/hypr
+    ~/.config/mako: hyprland/mako
+    ~/.config/wlogout: hyprland/wlogout
+    ~/.config/waybar: hyprland/waybar
+    ~/.config/rofi: hyprland/rofi
+
+    # System
+    ~/.config/environment.d: system/environment.d
+    ~/.config/paru: system/paru

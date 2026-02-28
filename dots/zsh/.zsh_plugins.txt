@@ -1,0 +1,7 @@
+romkatv/zsh-defer
+zsh-users/zsh-completions
+sindresorhus/pure
+Aloxaf/fzf-tab
+zdharma-continuum/fast-syntax-highlighting
+djui/alias-tips
+zsh-users/zsh-autosuggestions
