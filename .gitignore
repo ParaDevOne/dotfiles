@@ -7,3 +7,13 @@ zcompdump*
 # Datos dinámicos
 *history*
 *.log
+
+# Wallpapers
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mp4
+
+# Submódulos accidentales
+dotfiles-clean/

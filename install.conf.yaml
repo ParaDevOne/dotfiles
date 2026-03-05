@@ -2,29 +2,67 @@
     link:
       relink: true
       create: true
-      force: false
       relative: true
+      force: false
 
-- clean: ['~']
+- clean:
+    '~':
+      recursive: false
+    '~/.local/bin':
+      recursive: true
+    '~/.config':
+      recursive: true
+
+- shell:
+    - command: |
+        missing=$(comm -23 <(sort packages.txt) <(pacman -Qq | sort))
+        if [ -n "$missing" ]; then
+          echo -e "\e[33mInstalling missing packages:\e[0m $missing"
+          paru -S --needed --noconfirm $missing
+        else
+          echo -e "\e[32mSystem up to date\e[0m"
+        fi
+      description: Instaling packages
+      quiet: true
+      stdout: true
+      stderr: true
+      stdin: true
+
+- create:
+    - ~/.cache/zsh
+    - ~/.local/share/zsh
 
 - link:
     # Home
-    ~/.zshenv: home/.zshenv
+    ~/.zshenv:
+      path: home/.zshenv
 
     # Dots
     ~/.config/Code/User/settings.json:
-      path: dots/code/settings.json
-    ~/.config/kitty: dots/kitty
-    ~/.config/zsh: dots/zsh
-    ~/.config/fastfetch: dots/fastfetch
+        path: dots/code/settings.json
+    ~/.config/kitty:
+        path: dots/kitty
+    ~/.config/fastfetch:
+        path: dots/fastfetch
 
     # Hyprland
-    ~/.config/hypr: hyprland/hypr
-    ~/.config/mako: hyprland/mako
-    ~/.config/wlogout: hyprland/wlogout
-    ~/.config/waybar: hyprland/waybar
-    ~/.config/rofi: hyprland/rofi
+    ~/.config/hypr:
+        path: hyprland/hypr
+
+
+    ~/.config/mako:
+        path: hyprland/mako
+    ~/.config/wlogout:
+        path: hyprland/wlogout
+    ~/.config/waybar:
+        path: hyprland/waybar
+    ~/.config/rofi:
+        path: hyprland/rofi
 
     # System
-    ~/.config/environment.d: system/environment.d
-    ~/.config/paru: system/paru
+    ~/.config/environment.d:
+        path: system/environment.d
+    ~/.config/paru:
+        path: system/paru
+    ~/.config/zsh:
+        path: system/zsh

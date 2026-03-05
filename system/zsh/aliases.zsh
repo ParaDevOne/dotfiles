@@ -12,9 +12,7 @@ alias lsd='eza -d */ --icons=always'
 # ZSH Configuration
 alias reload='exec zsh'
 alias zcg='$EDITOR $ZDOTDIR/.zshrc'
-alias aliasconfig='$EDITOR $ZDOTDIR/aliases.zsh'
 alias zshplugins='$EDITOR $ZDOTDIR/.zsh_plugins.txt'
-alias v='$EDITOR'
 
 # System & File Operations
 alias cl='clear'
@@ -43,16 +41,9 @@ if command -v bat &> /dev/null; then
     alias bcat='bat --style=full'
 fi
 
-# Quick Directory Access
-alias dl='cd ~/Downloads'
-alias docs='cd ~/Documents'
-alias dev='cd ~/Dev'
-alias dots='cd ~/dotfiles'
-
 # Fun & Utilities
 alias wtf='dmesg | tail -n 50'
 alias wtfg='dmesg | grep -i'
-alias pls='sudo'
 alias fuck='sudo $(fc -ln -1)'
 alias lg='lazygit'
 
@@ -63,3 +54,5 @@ alias fh='history | fzf +s --tac | sed "s/ *[0-9]* *//" | wl-copy'
 
 # Imgs
 alias img='kitty +kitten icat'
+
+alias fm='yazi'

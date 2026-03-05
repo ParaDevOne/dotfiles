@@ -281,9 +281,3 @@ alias gwt='git worktree'
 alias gwta='git worktree add'
 alias gwtls='git worktree list'
 alias gwtrm='git worktree remove'
-
-# ============================================================================
-# CONFIRMACIÓN DE CARGA
-# ============================================================================
-
-print -P "%F{green}✓%f Git aliases cargados (%F{cyan}$(alias | grep -c "^g")%f aliases)"

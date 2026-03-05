@@ -7,9 +7,6 @@ zmodload zsh/datetime
 export ZSH_CACHE="${XDG_CACHE_HOME}/zsh"
 export ZSH_DATA="${XDG_DATA_HOME}/zsh"
 
-[[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
-[[ -d ~/.local/share/zsh ]] || mkdir -p ~/.local/share/zsh
-
 # Completion system
 _zdump="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 autoload -Uz compinit

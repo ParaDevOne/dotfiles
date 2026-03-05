@@ -6,25 +6,14 @@
 
 Modern, modular configuration for Arch Linux & Arch-based distros.
 
-## Prerequisites
+> EXPERIMENTAL!!!
+> ![Hyprland Setup](assets/screenshot.png)
 
-### System Requirements
+## Prerequisites
 
 - **OS**: Arch Linux or Arch-based distros (tested on **EndeavourOS**)
 - **Package Manager**: Pacman + Paru (AUR helper)
-
-### Dependencies
-
-```bash
-# Essential
-yay -S zsh git kitty fd rofi awww
-
-# CLI Tools
-yay -S eza fzf bat antidote
-
-# Optional but recommended
-yay -S lazygit fastfetch
-```
+- **Git**
 
 ## Installation
 
@@ -35,9 +24,16 @@ git clone --recurse-submodules https://github.com/ParaDevOne/dotfiles ~/dotfiles
 # 2. Change directory to ~/dotfiles
 cd ~/dotfiles
 
-# 3. Create symlinks
+# 3. Launch script
 ./install
 ```
+
+## Dotfiles Organization
+
+- **home/** - Files that must exist in $HOME (.zshenv, .bashrc, etc)
+- **dots/** - WM-agnostic applications (Code, Kitty, Fastfetch)
+- **hyprland/** - Wayland/Hyprland ecosystem (replaceable with other WM)
+- **system/** - OS-level configuration in ~/.config
 
 ---
 
