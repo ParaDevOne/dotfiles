@@ -1,0 +1,100 @@
+# Navigation & Listing (eza - modern ls replacement)
+alias ls='eza -a --icons=always --group-directories-first'
+alias ll='eza -al --icons=always --group-directories-first --git'
+alias lt='eza -a --tree --level=2 --icons=always --group-directories-first'
+alias ldir='eza -aD --icons=always'
+alias tree='eza --tree --icons=always --group-directories-first'
+alias treea='eza -al --tree --icons --git-ignore'
+alias lsd='eza -d */ --icons=always'
+
+# ZSH Configuration
+alias reload='exec zsh'
+alias zcg='$EDITOR $ZDOTDIR/.zshrc'
+alias zshplugins='$EDITOR $ZDOTDIR/.zsh_plugins.txt'
+
+# System & File Operations
+alias cl='clear'
+alias q='exit'
+alias ff='fastfetch'
+alias shutdown='systemctl poweroff'
+alias reboot='systemctl reboot'
+alias suspend='systemctl suspend'
+alias root='sudo su'
+
+# Safe file operations (with confirmation)
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -pv'
+
+# Search & Find
+alias grep='grep --color=auto'
+alias fd='fd --hidden --follow'
+alias fdf='fd --type f --hidden --follow'
+alias fdd='fd --type d --hidden --follow'
+
+# Fun & Utilities
+alias wtf='dmesg | tail -n 50'
+alias wtfg='dmesg | grep -i'
+alias lg='lazygit'
+
+# FZF Integration
+alias fv='v $(fzf --preview "bat --color=always --style=numbers --line-range=:500 {}")'
+alias fkill='ps -ef | fzf --header="Select process to kill" | awk "{print \$2}" | xargs -r kill -15'
+alias fh='history | fzf +s --tac | sed "s/ *[0-9]* *//" | wl-copy'
+
+# Imgs
+alias img='kitty +kitten icat'
+
+alias fm='yazi'
+
+alias g='git'
+
+alias v='nvim'
+
+#######################################
+#           pacman / paru             #
+#######################################
+
+# instalar / desinstalar
+alias install='paru -S'
+alias uninstall='paru -Rns'
+
+# buscar
+alias search='paru -Ss'
+alias show='paru -Si'
+
+# info local
+alias infop='pacman -Qi'
+alias list='pacman -Qs'
+
+# limpiar cache
+alias clean='paru -Sc'
+alias cleanall='paru -Scc'
+
+# huerfanos
+alias orphans='pacman -Qdt'
+alias rmorphans='[[ -n $(pacman -Qtdq) ]] && sudo pacman -Rs $(pacman -Qtdq) || echo "No orphans found"'
+
+# qué paquete es dueño de un archivo
+alias owners='pacman -Qo'
+
+# listar paquetes instalados explicitamente
+alias lsp='pacman -Qe'
+alias lsp-aur='pacman -Qm'
+
+function upgrade() {
+  sudo pacman -Sy
+  echo ":: Checking Arch Linux PGP Keyring..."
+  local installedver="$(LANG= sudo pacman -Qi archlinux-keyring | grep -Po '(?<=Version         : ).*')"
+  local currentver="$(LANG= sudo pacman -Si archlinux-keyring | grep -Po '(?<=Version         : ).*')"
+  if [ $installedver != $currentver ]; then
+    echo " Arch Linux PGP Keyring is out of date."
+    echo " Updating before full system upgrade."
+    sudo pacman -S --needed --noconfirm archlinux-keyring
+  else
+    echo " Arch Linux PGP Keyring is up to date."
+    echo " Proceeding with full system upgrade."
+  fi
+  paru -Su
+}

@@ -1,0 +1,16 @@
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#b4befe
+border-size=2
+border-radius=10
+default-timeout=5000
+ignore-timeout=1
+max-visible=3
+
+[urgency=critical]
+border-color=#f38ba8
+default-timeout=0
+background-color=#313244
+
+[category=system]
+border-color=#fab387

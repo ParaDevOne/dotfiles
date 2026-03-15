@@ -1,0 +1,218 @@
+@define-color bg #1e1e2e;
+@define-color bg_alt #313244;
+@define-color surface0 #45475a;
+@define-color mauve #cba6f7;
+@define-color blue #89b4fa;
+@define-color red #f38ba8;
+@define-color green #a6e3a1;
+@define-color yellow #f9e2af;
+@define-color teal #94e2d5;
+@define-color text #cdd6f4;
+@define-color subtext0 #a6adc8;
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+/* ── BARRA ── */
+window#waybar {
+  background-color: @bg;
+  border-bottom: 1px solid @surface0;
+}
+
+/* ── MÁRGENES LATERALES ── */
+.modules-left {
+  margin-left: 12px;
+}
+
+.modules-right {
+  margin-right: 12px;
+}
+
+/* ── MÓDULOS BASE ── */
+#clock,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#tray,
+#window,
+#custom-launcher,
+#custom-power {
+  background-color: transparent;
+  color: @text;
+  padding: 4px 12px;
+  margin: 0;
+}
+
+/* ── WORKSPACES ── */
+#workspaces {
+  margin: 0 4px;
+}
+
+#workspaces button {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 13px;
+  color: @subtext0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 4px 10px;
+  margin: 0 1px;
+}
+
+#workspaces button:hover {
+  background: @surface0;
+  color: @text;
+}
+
+#workspaces button.focused {
+  color: @mauve;
+  font-weight: 700;
+}
+
+#workspaces button.empty {
+  opacity: 0.4;
+}
+
+#workspaces button.urgent {
+  color: @red;
+  animation: blink 1s infinite;
+}
+
+/* ── WINDOW ── */
+#window {
+  color: @subtext0;
+  font-weight: 400;
+}
+
+/* ── CLOCK ── */
+#clock {
+  color: @text;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 16px;
+}
+
+/* ── AUDIO ── */
+#pulseaudio {
+  color: @yellow;
+}
+
+#pulseaudio.muted {
+  color: @subtext0;
+}
+
+/* ── NETWORK ── */
+#network {
+  color: @green;
+}
+
+#network.disconnected {
+  color: @red;
+}
+
+/* ── CPU & MEMORY ── */
+#cpu {
+  color: @blue;
+}
+
+#cpu.warning {
+  color: @yellow;
+}
+
+#cpu.critical {
+  color: @red;
+}
+
+#memory {
+  color: @green;
+}
+
+#memory.warning {
+  color: @yellow;
+}
+
+#memory.critical {
+  color: @red;
+}
+
+/* ── LAUNCHER ── */
+#custom-launcher {
+  color: @mauve;
+  font-size: 16px;
+  padding: 4px 14px;
+}
+
+#custom-launcher:hover {
+  background-color: @mauve;
+  color: @bg;
+}
+
+/* ── POWER ── */
+#custom-power {
+  color: @red;
+  font-size: 16px;
+  padding: 4px 12px;
+}
+
+#custom-power:hover {
+  background-color: @red;
+  color: @bg;
+}
+
+/* ── HOVERS MÓDULOS ── */
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#clock:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── TRAY ── */
+#tray {
+  padding: 4px 8px;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+/* ── TOOLTIPS ── */
+tooltip {
+  background-color: @bg_alt;
+  color: @text;
+  border-radius: 4px;
+  border: 1px solid @surface0;
+  padding: 4px 8px;
+}
+
+tooltip label {
+  color: @text;
+}
+
+/* ── ANIMACIONES ── */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

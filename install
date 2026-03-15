@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+CONFIG="install.conf.yaml"
+DOTBOT_DIR="dotbot"
+
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cd "${BASEDIR}"
+git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
+git submodule update --init --recursive "${DOTBOT_DIR}"
+
+# Installing packages
+echo -e "\e[34mChecking for missing packages...\e[0m"
+missing=$(comm -23 <(sort packages.txt) <(pacman -Qq | sort))
+if [ -n "$missing" ]; then
+    echo -e "\e[33mInstalling missing packages:\e[0m $missing"
+    echo "$missing" | xargs paru -S --needed --noconfirm
+else
+    echo -e "\e[32mSystem up to date\e[0m"
+fi
+
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"

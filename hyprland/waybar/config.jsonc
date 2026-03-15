@@ -1,0 +1,122 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 42,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "spacing": 0,
+    "modules-left": [
+        "custom/launcher",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "group/hardware",
+        "tray",
+        "custom/power"
+    ],
+    "custom/launcher": {
+        "format": "󰣇",
+        "on-click": "rofi -show drun",
+        "tooltip": false
+    },
+    "hyprland/workspaces": {
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "default": "",
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "0",
+            "active": "󱓻"
+        }
+    },
+    "hyprland/window": {
+        "format": "󰖲 {title}",
+        "max-length": 60,
+        "separate-outputs": true
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%A %H:%M:%S}",
+        "format-alt": "{:%d %B %V %Y}",
+        "tooltip": false
+    },
+    "group/hardware": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 300,
+            "children-class": "not-memory"
+        },
+        "modules": [
+            "cpu",
+            "memory"
+        ]
+    },
+    "cpu": {
+        "interval": 2,
+        "format": "󰍛 {usage}%",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+        "on-click": "kitty -e btop"
+    },
+    "memory": {
+        "interval": 5,
+        "format": "󰟜 {percentage}%",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G",
+        "on-click": "kitty -e btop"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": {
+            "default": [
+                "󰕿",
+                "󰖀",
+                "󰕾"
+            ],
+            "headphone": "",
+            "headset": "󰋎"
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "tooltip": false
+    },
+    "network": {
+        "interface": "wl*",
+        "format-wifi": "⇅ {signalStrength}%",
+        "format-ethernet": "⇅",
+        "format-disconnected": "⊘",
+        "tooltip-format-wifi": "{essid}",
+        "on-click": "kitty -e nmtui"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout -b 5",
+        "tooltip": false
+    }
+}:

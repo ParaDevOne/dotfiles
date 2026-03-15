@@ -1,0 +1,82 @@
+window {
+    background-color: rgba(30, 30, 46, 0.85);
+}
+
+button {
+    margin: 15px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30%;
+    color: #cdd6f4;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682);
+}
+
+button span {
+    font-size: 1.4rem;
+    margin-top: 160px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#lock:hover,
+#lock:focus {
+    background-color: rgba(137, 180, 250, 0.2);
+    border: 2px solid #89b4fa;
+    box-shadow: 0 0 20px rgba(137, 180, 250, 0.4);
+    color: #89b4fa;
+}
+
+#logout:hover,
+#logout:focus {
+    background-color: rgba(148, 226, 213, 0.2);
+    border: 2px solid #94e2d5;
+    box-shadow: 0 0 20px rgba(148, 226, 213, 0.4);
+    color: #94e2d5;
+}
+
+#suspend:hover,
+#suspend:focus {
+    background-color: rgba(250, 179, 135, 0.2);
+    border: 2px solid #fab387;
+    box-shadow: 0 0 20px rgba(250, 179, 135, 0.4);
+    color: #fab387;
+}
+
+#reboot:hover,
+#reboot:focus {
+    background-color: rgba(249, 226, 175, 0.2);
+    border: 2px solid #f9e2af;
+    box-shadow: 0 0 20px rgba(249, 226, 175, 0.4);
+    color: #f9e2af;
+}
+
+#shutdown:hover,
+#shutdown:focus {
+    background-color: rgba(243, 139, 168, 0.2);
+    border: 2px solid #f38ba8;
+    box-shadow: 0 0 25px rgba(243, 139, 168, 0.5);
+    color: #f38ba8;
+}
+
+#lock {
+    background-image: url("./icons/lock.png");
+}
+
+#logout {
+    background-image: url("./icons/logout.png");
+}
+
+#suspend {
+    background-image: url("./icons/suspend.png");
+}
+
+#reboot {
+    background-image: url("./icons/reboot.png");
+}
+
+#shutdown {
+    background-image: url("./icons/shutdown.png");
+}
